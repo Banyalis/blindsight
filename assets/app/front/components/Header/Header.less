@@ -1,0 +1,195 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@Header: .Header;
+
+.u-menuItem--active() {
+    background-color: @c-white;
+    color: @c-black;
+
+    @media @mobile {
+        background-color: transparent;
+        color: @c-red;
+    }
+}
+
+@{Header} {
+    position: fixed;
+    top: @scale * 40;
+    left: @scale * 40;
+    bottom: @scale * 40;
+    z-index: 1000;
+
+    @media @mobile {
+        top: @scale * 20;
+        left: 0;
+        right: 0;
+        bottom: inherit;
+        display: flex !important;
+        justify-content: center;
+        z-index: 10;
+    }
+
+    &.isDarkTheme @{Header}-menuItem {
+        border-color: @c-black;
+        background-color: @c-red;
+        color: @c-black;
+
+        .isDesktop &:hover {
+            background-color: @c-black;
+            color: @c-white;
+        }
+
+        .IndexPage &[data-id="index"],
+        .MemoriesPage &[data-id="memories"],
+        .AboutPage &[data-id="about"] {
+            background-color: @c-black;
+            color: @c-white;
+        }
+    }
+
+    &-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+        @media @mobile {
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        &Wrapper {
+            height: 100%;
+
+            @media @desktop {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            @media @mobile {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: @scale * 20 @scale * 15;
+                background-color: @c-brown;
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        &Item {
+            display: inline-block;
+            vertical-align: middle;
+            width: 20px;
+            height: 120px;
+            border: 1px solid @c-white;
+            border-radius: @scale * 50;
+            color: @c-white;
+            font-size: 14px;
+            text-transform: uppercase;
+            text-align: center;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            transition: background-color @ease, color @ease;
+
+            @media @mobile {
+                width: 100%;
+                height: auto;
+                border: none;
+                border-radius: 0;
+                position: relative;
+                font-size: @scale * 58;
+                line-height: 60 / 58;
+                letter-spacing: -@scale * 4;
+                text-align: left;
+                writing-mode: horizontal-tb;
+                transform: rotate(0);
+            }
+
+            &:nth-child(2) {
+                margin: @scale * 40 0;
+
+                @media @mobile {
+                    margin: 0;
+                }
+            }
+
+            .isDesktop &:hover {
+                .u-menuItem--active();
+            }
+
+            .IndexPage &[data-id="index"],
+            .MemoriesPage &[data-id="memories"],
+            .AboutPage &[data-id="about"] {
+                .u-menuItem--active();
+
+                pointer-events: none;
+            }
+
+            &Separator {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                display: none;
+                width: 0;
+                height: 1px;
+                background-color: #2d2d2d;
+
+                @media @mobile {
+                    display: block;
+                }
+            }
+        }
+
+        &Button {
+            .u-Button--large();
+
+            display: flex;
+
+            &Wrapper {
+                display: none;
+                width: 100%;
+
+                @media @mobile {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    &-openMenu {
+        display: none;
+        padding: @scale * 1 @scale * 20 @scale * 3;
+        border: 2px solid @c-white;
+        border-radius: @scale * 50;
+        background-color: transparent;
+        color: @c-white;
+        font-size: @scale * 12;
+        line-height: 20 / 12;
+        text-transform: uppercase;
+
+        @media @mobile {
+            display: flex;
+        }
+    }
+
+    &-closeMenu {
+        display: none;
+        margin-bottom: @scale * 20;
+
+        @media @mobile {
+            display: block;
+        }
+
+        svg {
+            width: @scale * 32;
+            height: @scale * 32;
+            fill: @c-white;
+        }
+    }
+}

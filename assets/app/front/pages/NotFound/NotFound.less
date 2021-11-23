@@ -1,0 +1,81 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@NotFound: .NotFound;
+
+@{NotFound} {
+    display: grid;
+    height: calc(var(--vh, 1vh) * 100);
+    padding-left: @scale * 200;
+    overflow: hidden;
+
+    @media @mobile {
+        align-items: flex-end;
+        padding: 0 @scale * 20 @scale * 40;
+    }
+
+    &-inner {
+        margin: auto 0;
+
+        @media @mobile {
+            margin: 0;
+        }
+    }
+
+    &-title {
+        color: @c-white;
+        font-size: @scale * 320;
+        line-height: 248 / 320;
+        letter-spacing: -@scale * 28;
+
+        @media @mobile {
+            font-size: @scale * 120;
+            line-height: 110 / 120;
+            letter-spacing: -@scale * 10;
+        }
+    }
+
+    &-nav {
+        display: flex;
+        position: relative;
+
+        @media @mobile {
+            flex-direction: column;
+            margin-bottom: -@scale * 5;
+        }
+
+        &Item {
+            display: flex;
+            color: @c-white;
+            font-size: @scale * 16;
+            line-height: 20 / 16;
+            text-transform: uppercase;
+            font-weight: @fw-bold;
+            transition: color @ease;
+
+            @media @mobile {
+                font-size: @scale * 12;
+                line-height: 20 / 12;
+            }
+
+            &:first-child:after {
+                content: "/";
+                display: block;
+                margin: 0 @scale * 5;
+                color: @c-white;
+            }
+
+            &:last-child {
+                color: @c-red;
+
+                .isDesktop &:hover {
+                    color: @c-white;
+                }
+            }
+
+            .isDesktop &:hover {
+                color: @c-red;
+            }
+        }
+    }
+}

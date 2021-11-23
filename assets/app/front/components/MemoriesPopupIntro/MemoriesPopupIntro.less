@@ -1,0 +1,110 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupIntro: .MemoriesPopup-intro;
+
+@{MemoriesPopupIntro} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: @scale * 780;
+    padding: @scale * 197 @scale * 76 @scale * 46 @scale * 180;
+    border-radius: @scale * 20;
+    position: relative;
+    background-color: @c-red;
+    text-transform: uppercase;
+
+    @media @mobile {
+        width: @scale * 390;
+        padding: @scale * 135 @scale * 38 @scale * 38 @scale * 90;
+    }
+
+    &Title {
+        position: absolute;
+        top: @scale * 80;
+        left: @scale * 180;
+        z-index: 10;
+        color: @c-black;
+        font-size: @scale * 200;
+        letter-spacing: -@scale * 8;
+        white-space: nowrap;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            top: @scale * 80;
+            left: @scale * 90;
+            font-size: @scale * 100;
+            letter-spacing: -@scale * 4;
+        }
+    }
+
+    &Header {
+        margin-left: @scale * 5;
+        position: relative;
+        z-index: 20;
+        color: @c-white;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 4;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+    }
+
+    &Number {
+        margin-left: @scale * 135;
+    }
+
+    &Size {
+        margin-top: -@scale * 5;
+        white-space: nowrap;
+
+        @media @mobile {
+            margin-top: 0;
+        }
+    }
+
+    &Footer {
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+
+    &Description {
+        margin: 0 0 @scale * 59 -@scale * 80;
+
+        @media @mobile {
+            margin: 0 0 @scale * 30 -@scale * 40;
+        }
+    }
+
+    &Text {
+        width: @scale * 400;
+        color: @c-black;
+        font-weight: @fw-regular;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            width: @scale * 200;
+        }
+
+        &:first-letter {
+            margin-right: @scale * 30;
+
+            @media @mobile {
+                margin-right: @scale * 20;
+            }
+        }
+    }
+}

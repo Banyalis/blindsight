@@ -1,0 +1,18 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupNext(block={}) %}
+    <div class="MemoriesPopup-next isAnimated">
+        <a href="{{ url('front:memories-popup', args=[block.slug]) }}" class="MemoriesPopup-nextCard Cursor-next u-Route">
+            <div class="MemoriesPopup-nextCardImage">
+                <img src="{{ block.cardImage }}" alt="">
+            </div>
+            <div class="MemoriesPopup-nextCardInner">
+                <div class="MemoriesPopup-nextCardCaption">Memory:{{ block.cardCaption }}</div>
+                <div class="MemoriesPopup-nextCardFooter">
+                    <div class="MemoriesPopup-nextCardHint">Next →</div>
+                    <div class="MemoriesPopup-nextCardTitle">{{ block.cardTitle }}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endmacro %}

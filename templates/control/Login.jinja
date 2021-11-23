@@ -1,0 +1,9 @@
+﻿{% extends 'control/Base.jinja' %}
+
+{% block bundle_styles %}
+    <link href="{{ static(bundle('control', 'login', 'main.css')) }}" rel="stylesheet">
+{% endblock %}
+
+{% block bundle_scripts %}
+    <script src="{{ static(bundle('control', 'login', 'main.js')) }}" async></script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% from 'front/components/CommonVideoPlayer/CommonVideoPlayer.jinja' import CommonVideoPlayer %}
+
+{% macro MemoriesPopupVideo(block={}) %}
+    <div class="MemoriesPopup-video isAnimated{% if block.largeSize == 'true' %} isLargeSize{% endif %}"
+        style="background: 
+                radial-gradient(transparent 3px, #{{ block.background }} 3px),
+                radial-gradient(transparent 3px, #{{ block.background }} 3px),
+                linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px) 0 -.5px,
+                linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px) -.5px 0;
+            background-color: #{{ block.background }};">
+        <div class="MemoriesPopup-videoCover">
+            {{ CommonVideoPlayer(block) }}
+        </div>
+        <div class="MemoriesPopup-videoFooter">
+            <div class="MemoriesPopup-videoTitle">{{ block.title }}</div>
+            <div class="MemoriesPopup-videoFooterInner">
+                <div class="MemoriesPopup-videoCaption">{{ block.caption }}</div>
+                <div class="MemoriesPopup-videoFile">File→<br>{{ block.file }}</div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

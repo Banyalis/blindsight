@@ -1,0 +1,8 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupNote(block={}) %}
+    <div class="MemoriesPopup-note isAnimated">
+        <div class="MemoriesPopup-noteQuestion">{{ block.question }}</div>
+        <div class="MemoriesPopup-noteAnswer">{{ block.answer }}</div>
+    </div>
+{% endmacro %}

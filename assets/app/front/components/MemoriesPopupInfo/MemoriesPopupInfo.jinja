@@ -1,0 +1,10 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupInfo(block={}) %}
+    <div class="MemoriesPopup-info isAnimated">
+        <div class="MemoriesPopup-infoImage">
+            <img data-lazy-load data-src="{{ block.image }}" alt="">
+        </div>
+        <div class="MemoriesPopup-infoText">{{ block.text | safe }}</div>
+    </div>
+{% endmacro %}

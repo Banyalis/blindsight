@@ -1,0 +1,67 @@
+{% import 'front/utils/macros.jinja' as macros %}
+
+{% from 'front/components/MemoriesPopupIntro/MemoriesPopupIntro.jinja' import MemoriesPopupIntro %}
+{% from 'front/components/MemoriesPopupChat/MemoriesPopupChat.jinja' import MemoriesPopupChat %}
+{% from 'front/components/MemoriesPopupGallery/MemoriesPopupGallery.jinja' import MemoriesPopupGallery %}
+{% from 'front/components/MemoriesPopupNote/MemoriesPopupNote.jinja' import MemoriesPopupNote %}
+{% from 'front/components/MemoriesPopupFilm/MemoriesPopupFilm.jinja' import MemoriesPopupFilm %}
+{% from 'front/components/MemoriesPopupWallpaper/MemoriesPopupWallpaper.jinja' import MemoriesPopupWallpaper %}
+{% from 'front/components/MemoriesPopupResources/MemoriesPopupResources.jinja' import MemoriesPopupResources %}
+{% from 'front/components/MemoriesPopupNext/MemoriesPopupNext.jinja' import MemoriesPopupNext %}
+{% from 'front/components/MemoriesPopupLater/MemoriesPopupLater.jinja' import MemoriesPopupLater %}
+{% from 'front/components/MemoriesPopupModel/MemoriesPopupModel.jinja' import MemoriesPopupModel %}
+{% from 'front/components/MemoriesPopupExploration/MemoriesPopupExploration.jinja' import MemoriesPopupExploration %}
+{% from 'front/components/MemoriesPopupVideo/MemoriesPopupVideo.jinja' import MemoriesPopupVideo %}
+{% from 'front/components/MemoriesPopupAcknowledgements/MemoriesPopupAcknowledgements.jinja' import MemoriesPopupAcknowledgements %}
+{% from 'front/components/MemoriesPopupInfo/MemoriesPopupInfo.jinja' import MemoriesPopupInfo %}
+{% from 'front/components/MemoriesPopupCredits/MemoriesPopupCredits.jinja' import MemoriesPopupCredits %}
+
+<div class="MemoriesPopup">
+    <div class="MemoriesPopup-overlay"></div>
+    <div class="MemoriesPopup-inner">
+        <a href="" class="MemoriesPopup-close">
+            {% call macros.svgSprite("i-close") %}{% endcall %}
+        </a>
+        <div class="HorizontalPage">
+            <div class="MemoriesPopup-content">
+                {{ MemoriesPopupIntro(popup) }}
+                {% for block in popup.blocks %}
+                    {% if block.type == 'chat' %}
+                        {{ MemoriesPopupChat(block) }}
+                    {% elif block.type == 'gallery' %}
+                        {{ MemoriesPopupGallery(block) }}
+                    {% elif block.type == 'note' %}
+                        {{ MemoriesPopupNote(block) }}
+                    {% elif block.type == 'film' %}
+                        {{ MemoriesPopupFilm(block) }}
+                    {% elif block.type == 'later' %}
+                        {{ MemoriesPopupLater(block) }}
+                    {% elif block.type == 'model' %}
+                        {{ MemoriesPopupModel(block) }}
+                    {% elif block.type == 'exploration' %}
+                        {{ MemoriesPopupExploration(block) }}
+                    {% elif block.type == 'video' %}
+                        {{ MemoriesPopupVideo(block) }}
+                    {% elif block.type == 'acknowledgements' %}
+                        {{ MemoriesPopupAcknowledgements(block) }}
+                    {% elif block.type == 'info' %}
+                        {{ MemoriesPopupInfo(block) }}
+                    {% elif block.type == 'credits' %}
+                        {{ MemoriesPopupCredits(block) }}
+                    {% endif %}
+                {% endfor %}
+                {% if popup.wallpaper == 'true' %}
+                    {{ MemoriesPopupWallpaper(popup) }}
+                {% endif %}
+                {{ MemoriesPopupResources(popup) }}
+                {{ MemoriesPopupNext(popup) }}
+                <div class="MemoriesPopup-end"></div>
+            </div>
+        </div>
+        <div class="MemoriesPopup-hintWrapper">
+            <div class="MemoriesPopup-hint">
+                {% call macros.svgSprite("i-next") %}{% endcall %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupCredits: .MemoriesPopup-credits;
+
+@{MemoriesPopupCredits} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: @scale * 510;
+    padding: @scale * 40;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    background-color: #050a0d;
+
+    @media @mobile {
+        width: @scale * 320;
+        padding: @scale * 15;
+    }
+
+    &Title {
+        color: @c-red;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 3;
+        text-transform: uppercase;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+    }
+
+    &List {
+        &Item {
+            display: flex;
+            font-size: @scale * 16;
+            line-height: 20 / 16;
+            text-transform: uppercase;
+    
+            @media @mobile {
+                font-size: @scale * 11;
+                line-height: 13 / 11;
+            }
+    
+            &Character {
+                width: @scale * 174;
+                margin-right: @scale * 46;
+                color: @c-red;
+                font-family: @font-secondary;
+    
+                @media @mobile {
+                    width: @scale * 130;
+                    margin-right: @scale * 20;
+                }
+            }
+    
+            &Voiceds {
+                width: @scale * 190;
+    
+                @media @mobile {
+                    width: auto;
+                }
+    
+                &Item {
+                    color: @c-white;
+                }
+            }
+        }
+
+        &Title {
+            margin: @scale * 35 0 @scale * 20 -@scale * 70;
+            color: @c-white;
+            font-size: @scale * 16;
+            line-height: 20 / 16;
+            text-transform: uppercase;
+            text-align: center;
+            font-family: @font-secondary;
+
+            @media @mobile {
+                margin: @scale * 25 0 @scale * 15 -@scale * 35;
+                font-size: @scale * 11;
+                line-height: 13 / 11;
+            }
+        }
+    }
+}

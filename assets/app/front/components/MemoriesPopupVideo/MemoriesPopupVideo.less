@@ -1,0 +1,105 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupVideo: .MemoriesPopup-video;
+
+@{MemoriesPopupVideo} {
+    display: flex;
+    align-items: center;
+    width: @scale * 850;
+    padding: 0 @scale * 40;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+
+    .isDesktop & {
+        background-size: @scale * 80 @scale * 80, 0 0, @scale * 40 @scale * 40, @scale * 40 @scale * 40 !important;
+    }
+
+    @media @mobile {
+        width: @scale * 640;
+        padding: 0 @scale * 20;
+    }
+
+    &.isLargeSize {
+        width: @scale * 1140;
+
+        @media @mobile {
+            width: @scale * 550;
+        }
+    }
+
+    &Cover {
+        width: 100%;
+        margin-top: -@scale * 50;
+
+        @media @mobile {
+            margin-top: 0;
+        }
+    }
+
+    &Footer {
+        position: absolute;
+        left: @scale * 40;
+        right: @scale * 40;
+        bottom: @scale * 40;
+        text-transform: uppercase;
+
+        @media @mobile {
+            left: @scale * 20;
+            right: @scale * 20;
+            bottom: @scale * 20;
+        }
+
+        &Inner {
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+
+    &Title, &Caption {
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+
+        div {
+            display: inline-block;
+        }
+    }
+
+    &Title {
+        margin-bottom: -@scale * 10;
+        color: @c-red;
+        letter-spacing: -@scale * 3;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            margin-bottom: -@scale * 5;
+        }
+    }
+
+    &Caption {
+        color: @c-white;
+        letter-spacing: -@scale * 4;
+    }
+
+    &File {
+        margin: 0 0 -@scale * 2 @scale * 16;
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            margin: 0 0 -@scale * 2 @scale * 10;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+}

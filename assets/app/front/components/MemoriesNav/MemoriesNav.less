@@ -1,0 +1,371 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesNav: .MemoriesNav;
+
+.u-memoriesItemShadow() {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: @scale * 20;
+}
+
+.u-memoriesItemVideo() {
+    .u-Absolute100();
+
+    border-radius: @scale * 20;
+    overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.u-memoriesItemContent() {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.u-memoriesItemFooter() {
+    display: flex;
+    align-items: flex-end;
+}
+
+.u-memoriesItemHint(@font-size, @line-height) {
+    color: @c-white; 
+    font-size: @scale * @font-size;
+    line-height: @line-height / @font-size;
+    font-weight: @fw-bold;
+    transition: color @ease;
+}
+
+.u-memoriesItemTitle(@color, @font-size, @line-height, @letter-spacing) {
+    color: @color;
+    font-size: @scale * @font-size;
+    line-height: @line-height / @font-size;
+    letter-spacing: -@scale * @letter-spacing;
+}
+
+@{MemoriesNav} {
+    &.isSpiral {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        @{MemoriesNav} {
+            &-item {
+                height: 100%;
+
+                .isDesktop &:hover @{MemoriesNav}-item {
+                    &Content {
+                        filter: brightness(100%) !important;
+                        transition: filter @ease;
+                    }
+
+                    &Overlay {
+                        opacity: 0 !important;
+                        transition: opacity @ease;
+                    }
+                }
+
+                &Wrapper {
+                    position: absolute;
+                    top: 48.5vh;
+                    left: 85.5vw;
+                    width: 880px;
+                    height: 480px;
+                    margin: -240px 0 0 -440px;
+                    will-change: opacity, transform;
+                    transform-origin: 50% 50%;
+                    transition: filter .4s ease-in-out;
+
+                    .mixin-loop(@i) when (@i > 0) {
+                        &:nth-child(@{i}) {
+                            z-index: (19 - @i);
+                        }
+
+                        .mixin-loop(@i - 1);
+                    }
+
+                    .mixin-loop(18);
+
+                    .disabledHover & {
+                        pointer-events: none;
+                    }
+                }
+
+                &Inner {
+                    &:before {
+                        box-shadow: 0 10px 40px fade(@c-red, 20%);
+                    }
+
+                    &:after {
+                        box-shadow: 0 20px 60px fade(@c-red, 50%);
+                    }
+                }
+
+                &Content {
+                    position: absolute;
+                    left: @scale * 80;
+                    bottom: -@scale * 100;
+                    z-index: 10;
+                    transform: translateZ(0);
+                }
+        
+                &Caption {
+                    .u-memoriesItemTitle(@c-white, 72, 72, 4);
+
+                    margin-bottom: @scale * 5;
+                }
+        
+                &Hint {
+                    .u-memoriesItemHint(16, 20);
+
+                    margin: 0 @scale * 70 @scale * 15 0;
+                }
+        
+                &Title {
+                    .u-memoriesItemTitle(@c-red, 72, 72, 4);
+                }
+
+                &Overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #080a14;
+                    will-change: opacity;
+                }
+            }
+
+            &-control {
+                opacity: 1;
+                visibility: visible;
+
+                &.isHidden {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+    
+    &.isGrid {
+        display: grid;
+        height: calc(var(--vh, 1vh) * 100);
+
+        @{MemoriesNav} {
+            &-inner {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: @scale * 30;
+                width: @scale * 1520;
+                margin: auto;
+                padding: @scale * 20;
+            }
+        
+            &-item {
+                height: @scale * 260;
+        
+                &Wrapper {
+                    display: block !important;
+                    opacity: 1 !important;
+                    pointer-events: all !important;
+                    filter: blur(0) !important;
+                    transform: rotate(0) translate(0) scale(1) rotate(0) !important;
+
+                    &.isCloned {
+                        display: none !important;
+                    }
+                }
+
+                &Inner {
+                    padding: @scale * 20;
+
+                    &:before {
+                        box-shadow: 0 10px 20px fade(@c-black, 50%);
+                    }
+
+                    &:after {
+                        box-shadow: 0 5px 20px fade(@c-red, 50%);
+                    }
+                }
+        
+                &Content {
+                    .u-memoriesItemContent();
+
+                    filter: brightness(100%) !important;
+                }
+        
+                &Caption {
+                    .u-memoriesItemTitle(@c-white, 32, 30, 2);
+        
+                    margin-bottom: @scale * 7;
+                }
+        
+                &Hint {
+                    .u-memoriesItemHint(10, 20);
+
+                    margin-right: @scale * 5;
+                }
+        
+                &Title {
+                    .u-memoriesItemTitle(@c-red, 32, 30, 2);
+                }
+            }
+        }
+    }
+
+    @media @mobile {
+        display: none !important;
+    }
+
+    &-item {
+        display: block;
+        text-transform: uppercase;
+
+        .isDesktop & {
+            &:hover @{MemoriesNav}-item {
+                &Inner {
+                    &:before, &:after {
+                        will-change: opacity;
+                    }
+
+                    &:before {
+                        opacity: 0;
+                    }
+
+                    &:after {
+                        opacity: 1;
+                    }
+                }
+
+                &Hint {
+                    color: @c-red;
+                }
+            }
+
+            &:active @{MemoriesNav}-itemInner {
+                transform: scale(.97);
+            }
+
+            &.onHover @{MemoriesNav}-item {
+                &Video video {
+                    opacity: 1;
+                    visibility: visible;
+                    transition: none;
+                }
+
+                &Image {
+                    opacity: 0;
+                    transition: none;
+                }
+            }
+        }
+
+        &Inner {
+            height: 100%;
+            position: relative;
+            transition: transform @ease;
+
+            &:before, &:after {
+                .u-memoriesItemShadow();
+
+                transition: opacity @ease;
+            }
+
+            &:after {
+                opacity: 0;
+            }
+        }
+
+        &Video {
+            .u-memoriesItemVideo();
+
+            video {
+                .u-AbsoluteObjectFit();
+
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: all 0s cubic-bezier(0.165, 0.84, 0.44, 1) 350ms;
+            }
+        }
+
+        &Image {
+            height: 100%;
+            pointer-events: none;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            transition: opacity 350ms cubic-bezier(0.165, 0.84, 0.44, 1);
+
+        }
+
+        &Footer {
+            .u-memoriesItemFooter();
+        }
+
+        &Title {
+            font-family: @font-secondary;
+        }
+    }
+
+    &-control {
+        position: absolute;
+        left: 50%;
+        bottom: @scale * 80;
+        display: none;
+        z-index: 50;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%);
+        transition: opacity @ease, visibility @ease;
+
+        .isTablet & {
+            display: flex;
+        }
+
+        &Prev, &Next {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: @scale * 70;
+            height: @scale * 70;
+            border: 2px solid @c-red;
+            border-radius: 100%;
+            position: relative;
+
+            &:before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: -@scale * 20;
+                left: -@scale * 20;
+                right: -@scale * 20;
+                bottom: -@scale * 20;
+                border-radius: 100%;
+            }
+        }
+
+        &Prev {
+            margin-right: @scale * 30;
+
+            svg {
+                transform: rotate(-180deg);
+            }
+        }
+
+        svg {
+            width: @scale * 30;
+            height: @scale * 30;
+            fill: @c-red;
+        }
+    }
+}

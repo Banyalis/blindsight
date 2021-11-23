@@ -1,0 +1,91 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupGallery(block={}) %}
+    <div class="MemoriesPopup-galleryWrapper
+        {% if block.largeSize == 'true' %} isLargeSize
+        {% elif block.mediumSize == 'true' %} isMediumSize
+        {% elif block.smallSize == 'true' %} isSmallSize{% endif %}
+        {% if block.blackTheme == 'true' %} isBlackTheme{% endif %}
+        {% if block.centeredGallery == 'true' %} isCentered{% endif %}
+        {% if block.videoGallery == 'true' %} isVideoGallery{% endif %} isAnimated">
+        <div class="MemoriesPopup-gallery"{% if block.gallery | length > 1 %} data-gallery{% endif %}>
+            {% set galleryLength = block.gallery %}
+            {% for item in block.gallery %}
+                <div class="MemoriesPopup-galleryItem
+                {% if item.zoom == 'true' %} MemoriesPopup-galleryZoomOpen Cursor-zoom{% endif %}
+                {% if item.backgroundGrid == 'true' %} isBackgroundGrid{% endif %}"
+                {% if item.backgroundGrid == 'true' %}
+                    style="background: 
+                            radial-gradient(transparent 3px, #{{ item.background }} 3px),
+                            radial-gradient(transparent 3px, #{{ item.background }} 3px),
+                            linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px) 0 -.5px,
+                            linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px) -.5px 0;
+                        background-color: #{{ item.background }};"
+                {% elif item.backgroundGrid == 'false' %}
+                    style="background-color: #{{ item.background }}"
+                {% endif %}>
+                    <div class="MemoriesPopup-galleryItemInner{% if item.fill == 'cover' %} isTypeCover{% endif %}">
+                        {% if block.videoGallery == 'true' %}
+                            <video preload="none" autoplay loop muted canplaythrough playsinline>
+                                <source src="{{ item.video }}" type="video/mp4">
+                            </video>
+                            <img data-lazy-load data-src="{{ item.image }}" alt="">
+                        {% else %}
+                            <img data-lazy-load data-src="{{ item.image }}" alt="">
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if block.showZoom == 'true' or block.gallery | length > 1 %}
+            <div class="MemoriesPopup-galleryOverlay"></div>
+        {% endif %}
+        <div class="MemoriesPopup-galleryFooter">
+            <div class="MemoriesPopup-galleryInfo">
+                <div class="MemoriesPopup-galleryTitle">{{ block.title }}</div>
+                <div class="MemoriesPopup-galleryInfoInner">
+                    <div class="MemoriesPopup-galleryCaption">{{ block.caption }}</div>
+                    <div class="MemoriesPopup-galleryFile">File→<br>{{ block.file }}</div>
+                </div>
+            </div>
+            {% if block.gallery | length > 1 %}
+                <div class="MemoriesPopup-galleryNav">
+                    <a href="" class="MemoriesPopup-galleryNavPrev" data-gallery-prev>
+                        {% call macros.svgSprite("i-next") %}{% endcall %}
+                    </a>
+                    <a href="" class="MemoriesPopup-galleryNavNext" data-gallery-next>
+                        {% call macros.svgSprite("i-next") %}{% endcall %}
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        {% if block.showZoom == 'true' %}
+            <div class="MemoriesPopup-galleryZoom">
+                <div class="MemoriesPopup-galleryZoomInner" data-gallery>
+                    {% for item in block.gallery %}
+                        {% if item.zoom == 'true' %}
+                            <div class="MemoriesPopup-galleryZoomItem">
+                                <div class="MemoriesPopup-galleryZoomItemInner">
+                                    <img data-src="{{ item.imageZoom }}">
+                                </div>
+                            </div> 
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="MemoriesPopup-galleryZoomClose Cursor-close">
+                    {% call macros.svgSprite("i-close") %}{% endcall %}
+                </div>
+                {% if block.gallery | length > 1 %}
+                    <div class="MemoriesPopup-galleryZoomNav">
+                        <a href="" class="MemoriesPopup-galleryZoomNavPrev" data-gallery-prev>
+                            {% call macros.svgSprite("i-next") %}{% endcall %}
+                        </a>
+                        <a href="" class="MemoriesPopup-galleryZoomNavNext" data-gallery-next>
+                            {% call macros.svgSprite("i-next") %}{% endcall %}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}

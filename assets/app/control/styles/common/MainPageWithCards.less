@@ -1,0 +1,43 @@
+@import "~styles/const.less";
+
+.MainPageWithCards {
+    .MainPageWithCardsList {
+        margin: 91px auto 80px;
+        width: 920px;
+        min-height: calc(100vh - 481px);
+    }
+
+    .WideCard {
+        margin-bottom: 20px;
+    }
+
+    .MainPageWithCardsBottom {
+        background: white;
+        border-top: 1px solid @color-border-gray;
+        padding: 10px 0 80px;
+        //min-height: calc(100vh - 720px);
+
+        &Inner {
+            margin: 50px auto 44px;
+            width: 920px;
+            display: flex;
+        }
+        &Header {
+            font-size: 12px;
+            line-height: 20px;
+            color: #48555d;
+            letter-spacing: 0;
+            width: 320px;
+            strong {
+                font-size: 24px;
+                font-weight: bold;
+                display: block;
+                color: @color-dark;
+                margin-bottom: 5px;
+            }
+        }
+        .InputView {
+            width: 440px;
+        }
+    }
+}

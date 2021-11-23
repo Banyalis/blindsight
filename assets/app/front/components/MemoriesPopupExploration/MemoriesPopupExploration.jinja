@@ -1,0 +1,40 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupExploration(block={}) %}
+    <div class="MemoriesPopup-exploration isAnimated">
+        {% for i in range(1, 75) %}
+            {% if i < 10 %}
+                {% set i = i | string %}
+            {% endif %}
+            <div class="MemoriesPopup-explorationImage{% if loop.last %} isShow{% endif %}" data-src="{{ static('img/popups/5/sequence/solar-' + i | string + '.jpg') }}"></div>
+        {% endfor %}
+        <div class="MemoriesPopup-explorationFooter">
+            <div class="MemoriesPopup-explorationTitle">Exploration</div>
+            <div class="MemoriesPopup-explorationFooterInner">
+                <div class="MemoriesPopup-explorationCaption">Render</div>
+                <div class="MemoriesPopup-explorationFile">File→<br>Ui_solar_01.mp4</div>
+            </div>
+        </div>
+        <div class="MemoriesPopup-explorationBackground"></div>
+        <div class="MemoriesPopup-explorationLoader">
+            <div class="MemoriesPopup-explorationLoaderSpinner">
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+                <span class="MemoriesPopup-explorationLoaderSpinnerLine"></span>
+            </div>
+            <div class="MemoriesPopup-explorationLoaderInner">
+                <div class="MemoriesPopup-explorationLoaderTitle">Sequence loading</div>
+                <div class="MemoriesPopup-explorationLoaderPercentage"><span>0</span>/74</div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

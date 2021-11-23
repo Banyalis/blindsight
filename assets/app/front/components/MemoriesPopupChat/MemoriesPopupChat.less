@@ -1,0 +1,336 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupChat: .MemoriesPopup-chat;
+
+.u-chatText() {
+    font-size: @scale * 16;
+    line-height: 20 / 16;
+    font-weight: @fw-bold;
+
+    @media @mobile {
+        font-size: @scale * 8;
+        line-height: 10 / 8;
+    }
+}
+
+@{MemoriesPopupChat} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding: @scale * 45 @scale * 40 @scale * 70;
+    border-radius: @scale * 20;
+    overflow: hidden;
+    background-color: @c-white;
+    background-image: linear-gradient(@c-black 1px, transparent 0), linear-gradient(90deg, @c-black 1px, transparent 0);
+    background-size: @scale * 80 @scale * 80;
+    background-position: center center;
+
+    @media @mobile {
+        padding: @scale * 20 @scale * 20 @scale * 40;
+        background-size: @scale * 40 @scale * 40;
+    }
+
+    &Item {
+        width: @scale * 560;
+
+        @media @mobile {
+            width: @scale * 280;
+        }
+    }
+
+    &.isLargeSize, &.isMediumSize {
+        flex-direction: row;
+        align-items: flex-end;
+
+        @{MemoriesPopupChat}Item {
+            margin-right: @scale * 80;
+
+            @media @mobile {
+                margin-right: @scale * 40;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &.isSmallSize {
+        justify-content: flex-end;
+    }
+
+    &Item {
+        text-transform: uppercase;
+
+        &.isRedTheme @{MemoriesPopupChat}Item {
+            &Header {
+                color: @c-red;
+            }
+
+            &Inner {
+                background-color: @c-red;
+
+                &:before {
+                    border-color: @c-red transparent transparent transparent;
+                }
+            }
+        }
+
+        &.isGrayTheme @{MemoriesPopupChat}ItemInner {
+            background-color: #7a7b7d;
+
+            &:before {
+                border-color: #7a7b7d transparent transparent transparent;
+            }
+        }
+
+        &.isWhiteTheme @{MemoriesPopupChat}ItemInner {
+            border: 2px solid @c-black;
+            background-color: @c-white;
+            color: @c-black;
+
+            &:before {
+                border-color: @c-white transparent transparent transparent;
+                z-index: 20;
+            }
+
+            &:after {
+                left: @scale * 78;
+                bottom: -@scale * 44;
+                border-width: @scale * 44 @scale * 44 0 0;
+                border-color: @c-black transparent transparent transparent;
+                z-index: 10;
+
+                @media @mobile {
+                    left: @scale * 68;
+                    bottom: -@scale * 23;
+                    border-width: @scale * 23 @scale * 24 0 0;
+                }
+            }
+        }
+
+        &Header {
+            .u-chatText();
+
+            margin-bottom: @scale * 15;
+            color: @c-black;
+
+            @media @mobile {
+                margin-bottom: @scale * 8;
+            }
+        }
+
+        &Inner {
+            padding: @scale * 30;
+            border-radius: @scale * 20;
+            position: relative;
+            background-color: @c-black;
+            color: @c-white;
+            font-size: @scale * 30;
+            line-height: 30 / 30;
+            letter-spacing: -1px;
+
+            @media @mobile {
+                padding: @scale * 20;
+                border-radius: @scale * 10;
+                font-size: @scale * 15;
+                line-height: 15 / 15;
+            }
+
+            &:before, &:after {
+                content: "";
+                display: block;
+                position: absolute;
+                border-style: solid;
+                border-color: transparent;
+            }
+
+            &:before {
+                left: @scale * 80;
+                bottom: -@scale * 39;
+                border-width: @scale * 40 @scale * 40 0 0;
+                border-color: @c-black transparent transparent transparent;
+
+                @media @mobile {
+                    left: @scale * 70;
+                    bottom: -@scale * 19;
+                    border-width: @scale * 20 @scale * 20 0 0;
+                }
+            }
+        }
+
+        &Text:first-letter {
+            margin-right: @scale * 20;
+
+            @media @mobile {
+                margin-right: @scale * 10;
+            }
+        }
+
+        &Link {
+            color: @c-red;
+            transition: color @ease; 
+
+            .isDesktop &:hover {
+                color: @c-white;
+            }
+        }
+
+        &Image {
+            width: 60%;
+            margin-top: @scale * 20;
+
+            @media @mobile {
+                width: 70%;
+                margin-top: @scale * 10;
+            }
+
+            &.isHeightLimit {
+                height: @scale * 250;
+
+                @media @mobile {
+                    height: @scale * 150;
+                }
+            }
+
+            img {
+                .u-ObjectFit(contain, left);
+            }
+
+            &Zoom {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                display: none;
+                width: 100vw;
+                padding: @scale * 40;
+                background-color: fade(@c-black, 95%);
+                z-index: 30;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity @ease, visibility @ease;
+
+                .isDesktop & {
+                    display: block;
+                }
+
+                @media @mobile {
+                    padding: @scale * 10;
+                }
+
+                &.isOpen {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                img {
+                    .u-ObjectFit(contain);
+                }
+
+                &Close {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+
+                    .isTablet &, .isMobile & {
+                        top: @scale * 20;
+                        left: @scale * 20;
+                        right: inherit;
+                        bottom: inherit;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: @scale * 40;
+                        height: @scale * 40;
+                        border: 2px solid @c-red;
+                        border-radius: 100%;
+                    }
+        
+                    svg {
+                        display: none;
+                        width: @scale * 15;
+                        height: @scale * 15;
+                        fill: @c-red;
+        
+                        .isTablet &, .isMobile & {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+
+        &Reference {
+            display: flex;
+            align-items: center;
+            margin-top: @scale * 35;
+            padding: @scale * 25 @scale * 30;
+            border: 1px solid fade(@c-white, 20%);
+            border-radius: @scale * 5;
+            transition: border-color @ease, background-color @ease;
+
+            @media @mobile {
+                margin-top: @scale * 15;
+                padding: @scale * 10 @scale * 15;
+            }
+
+            .isDesktop &:hover {
+                border-color: @c-white;
+                background-color: #191a1b;
+            }
+
+            &Image {
+                flex-shrink: 0;
+                width: @scale * 80;
+                margin-right: @scale * 30;
+
+                @media @mobile {
+                    width: @scale * 30;
+                    margin-right: @scale * 15;
+                }
+
+                img {
+                    .u-ObjectFit();
+                }
+            }
+
+            &Inner {
+                .u-chatText();
+            }
+
+            &Title {
+                margin-bottom: @scale * 15;
+                color: @c-white;
+
+                @media @mobile {
+                    margin-bottom: @scale * 5;
+                }
+
+                &:first-letter {
+                    margin-right: @scale * 10;
+
+                    @media @mobile {
+                        margin-right: @scale * 5;
+                    }
+                }
+            }
+
+            &Text {
+                width: @scale * 300;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                color: @c-red;
+
+                @media @mobile {
+                    width: @scale * 130;
+                }
+            }
+        }
+    }
+}

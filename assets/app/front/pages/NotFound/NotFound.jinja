@@ -1,0 +1,31 @@
+{% extends 'front/pages/Section/Section.jinja' %}
+
+{% from 'front/components/CommonVideoBackground/CommonVideoBackground.jinja' import CommonVideoBackground %}
+
+{% block title %} Not Found {% endblock %}
+
+{% block social %}
+    <meta name="description" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="{{ static('img/share/share-default.jpg') }}"/>
+    <meta property="og:image:width" content="1440"/>
+    <meta property="og:image:height" content="640"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri() }}">
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+{% endblock %}
+
+{% block body_class %} Page404{% endblock %}
+
+{% block content %}
+    <div class="NotFound">
+        <div class="NotFound-inner">
+            <div class="NotFound-nav">
+                <a href="/memories/" class="NotFound-navItem">Corrupt Memories</a>
+                <a href="/" class="NotFound-navItem">Restart Application →</a>
+            </div>
+            <div class="NotFound-title">404</div>
+        </div>
+        {{ CommonVideoBackground(error) }}
+    </div>
+{% endblock %}

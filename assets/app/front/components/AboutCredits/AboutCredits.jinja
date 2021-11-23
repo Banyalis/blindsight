@@ -1,0 +1,22 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro AboutCredits(data={}) %}
+    <div class="AboutCredits isAnimated">
+        <div class="AboutCredits-inner">
+            <div class="AboutCredits-title">Credits</div>
+            <div class="AboutCredits-list">
+                {% for item in data.creditsList %}
+                    <div class="AboutCredits-listItem">
+                        <div class="AboutCredits-listItemPosition">{{ item.position }}</div>
+                        <div class="AboutCredits-listItemNames">
+                            {% for item in item.creditsNames %}
+                                <a href="{{ item.url }}" target="_blank" class="AboutCredits-listItemNamesTitle">{{ item.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="AboutCredits-period">2016-2020</div>
+    </div>
+{% endmacro %}

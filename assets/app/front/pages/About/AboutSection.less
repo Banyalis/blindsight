@@ -1,0 +1,46 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@AboutSection: .AboutSection;
+
+@{AboutSection} {
+    overflow: hidden;
+
+    &-inner {
+        display: grid;
+        grid-template-columns: @scale * 920 repeat(3, @scale * 410);
+        grid-gap: 0 @scale * 200;
+        // align-self: center;
+        margin-right: @scale * 200;
+        padding-left: @scale * 200;
+
+        @media @mobile {
+            grid-template-columns: @scale * 400 repeat(3, @scale * 250);
+            grid-gap: 0 @scale * 60;
+            margin-right: @scale * 60;
+            padding-left: @scale * 20;
+        }
+    }
+    
+    &-end {
+        flex-shrink: 0;
+        width: @scale * 20;
+
+        @media @mobile {
+            width: @scale * 15;
+        }
+    }
+
+    .HorizontalPage {
+        padding: @scale * 50 0;
+
+        @media @mobile {
+            padding: @scale * 80 0 @scale * 20;
+            overflow-y: hidden;
+        }
+    }
+
+    .CommonVideo-background {
+        opacity: .4;
+    }
+}

@@ -1,0 +1,124 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupFilm: .MemoriesPopup-film;
+
+@{MemoriesPopupFilm} {
+    flex-shrink: 0;
+    width: @scale * 1280;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    background-color: @c-black;
+
+    @media @mobile {
+        width: @scale * 640;
+    }
+
+    &Video {
+        height: 100%;
+
+        // &.isHidden {
+        //     video {
+        //         display: none;
+        //     }
+
+        //     img {
+        //         display: block;
+        //     }
+        // }
+
+        video, img {
+            .u-ObjectFit();
+        }
+
+        video {
+            .isTablet &, .isMobile & {
+                display: none;
+            }
+        }
+    
+        img {
+            .isDesktop & {
+                display: none;
+            }
+        }
+    }
+
+    &Footer {
+        position: absolute;
+        left: @scale * 40;
+        right: @scale * 40;
+        bottom: @scale * 40;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        @media @mobile {
+            left: @scale * 20;
+            right: @scale * 20;
+            bottom: @scale * 20;
+        }
+
+        &Inner {
+            text-transform: uppercase;
+        }
+    }
+
+    &Title, &Caption {
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+
+        div {
+            display: inline-block;
+        }
+    }
+
+    &Title {
+        margin-bottom: -@scale * 10;
+        color: @c-red;
+        letter-spacing: -@scale * 3;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            margin-bottom: -@scale * 5;
+        }
+    }
+
+    &Caption {
+        color: @c-white;
+        letter-spacing: -@scale * 4;
+    }
+
+    &File {
+        margin: 0 0 -@scale * 2 @scale * 16;
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            margin: 0 0 -@scale * 2 @scale * 10;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+
+    &Button {
+        .u-Button--small();
+
+        display: flex;
+        width: @scale * 400;
+
+        @media @mobile {
+            width: @scale * 200;
+        }
+    }
+}

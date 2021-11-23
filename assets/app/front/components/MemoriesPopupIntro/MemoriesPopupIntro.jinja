@@ -1,0 +1,15 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupIntro(popup={}) %}
+    <div class="MemoriesPopup-intro Cursor-redZone isAnimated">
+        <div class="MemoriesPopup-introTitle">{{ popup.introTitle }}</div>
+        <div class="MemoriesPopup-introHeader">
+            <div class="MemoriesPopup-introNumber">{{ popup.introNumber }} →</div>
+            <div class="MemoriesPopup-introSize">Memory: <span>{{ popup.introSize }}</span>mb</div>
+        </div>
+        <div class="MemoriesPopup-introFooter">
+            <div class="MemoriesPopup-introDescription">Book Reference ↓<br>Chapter {{ popup.introDescription }} / Peter Watts “Blindsight”</div>
+            <p class="MemoriesPopup-introText">→{{ popup.introText | safe }}</p>
+        </div>
+    </div>
+{% endmacro %}

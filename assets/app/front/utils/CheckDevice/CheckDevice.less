@@ -1,0 +1,30 @@
+// Для определения ширины экрана в js
+
+/* desktop */
+.u-StateIndicator {
+    position: absolute;
+    top: -999em;
+    left: -999em;
+    z-index: 1;
+}
+
+/* laptop */
+@media screen and (max-width: 1279px) {
+    .u-StateIndicator {
+        z-index: 2;
+    }
+}
+
+/* tablet */
+@media screen and (max-width: 1023px) {
+    .u-StateIndicator {
+        z-index: 3;
+    }
+}
+
+/* mobile */
+@media screen and (max-width: 767px) {
+    .u-StateIndicator {
+        z-index: 4;
+    }
+}

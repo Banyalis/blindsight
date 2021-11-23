@@ -1,0 +1,167 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesSlider: .MemoriesSlider;
+
+.u-sliderText(@color) {
+    color: @color;
+    font-size: @scale * 32;
+    line-height: 30 / 32;
+    letter-spacing: -@scale * 2;
+}
+
+@{MemoriesSlider} {
+    position: fixed;
+    left: 0;
+    right: 0;
+    display: none;
+    height: ~"calc(100% - 50px)";
+    transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
+
+    @media @mobile {
+        display: block;
+    }
+
+    &.isHidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &-inner {
+        height: 100%;
+        padding: @scale * 20 0 @scale * 25 !important;
+        overflow: inherit !important;
+    }
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+
+        &Wrapper {
+            padding: 0 @scale * 15;
+
+            &.swiper-slide {
+                &-prev @{MemoriesSlider}-item {
+                    transform: scale(1.1);
+                }
+
+                &-next @{MemoriesSlider}-item {
+                    transform: scale(.9);
+                }
+
+                &-active @{MemoriesSlider}-item {
+                    pointer-events: all;
+                    opacity: 1;
+                    transform: scale(1);
+
+                    &Image img {
+                        transition-delay: .5s;
+                        transform: scale(1);
+                    }
+                }
+            }
+        }
+
+        &Image {
+            height: 100%;
+            border-radius: @scale * 20;
+            overflow: hidden;
+            box-shadow: 0 5px 20px fade(@c-red, 20%);
+            transform: translateZ(0);
+
+            img {
+                .u-ObjectFit();
+
+                transform: scale(1.1);
+                transition: transform 1s ease-in-out;
+            }
+        }
+
+        &Content {
+            margin-top: -@scale * 20;
+            padding: 0 @scale * 20;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        &Caption {
+            .u-sliderText(@c-white);
+
+            margin-bottom: @scale * 10;
+        }
+
+        &Footer {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        &Hint {
+            margin: 0 @scale * 10 @scale * 2 @scale * 3;
+            color: @c-white; 
+            font-size: @scale * 10;
+            line-height: 20 / 10;
+            white-space: nowrap;
+            font-weight: @fw-bold;
+            transition: color @ease;
+        }
+
+        &Title {
+            .u-sliderText(@c-red);
+
+            font-family: @font-secondary;
+        }
+    }
+
+    .swiper {
+        &-wrapper {
+            height: ~"calc(100% - 60px)";
+        }
+
+        &-pagination {
+            bottom: @scale * 50 !important;
+
+            &-bullet {
+                display: inline-block;
+                width: @scale * 4;
+                height: @scale * 4;
+                margin: 0 @scale * 6 !important;
+                border: 1px solid @c-white;
+                border-radius: 100%;
+                opacity: 1;
+                transition: border-color @ease, background-color @ease, transform @ease;
+
+                &-active {
+                    border-color: @c-red;
+                    background-color: @c-red !important;
+                    transform: scale(1.5);
+                }
+            }
+        }
+    }
+
+    &-hint {
+        position: absolute;
+        top: 50%;
+        right: @scale * 10;
+        width: @scale * 30;
+        height: @scale * 26;
+        margin-top: -@scale * 52;
+        z-index: 10;
+        transition: opacity @ease, visibility @ease;
+
+        &.isHidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            fill: @c-red;
+        }
+    }
+}

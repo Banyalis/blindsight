@@ -1,0 +1,147 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@CommonAudioPlayer: .CommonAudioPlayer;
+
+@{CommonAudioPlayer} {
+    display: flex;
+    align-items: center;
+    margin-top: @scale * 47;
+
+    @media @mobile {
+        margin-top: @scale * 15;
+    }
+
+    &.isPlaying @{CommonAudioPlayer} {
+        &-controls {
+            background-color: transparent;
+
+            .isDesktop &:hover {
+                background-color: @c-white;
+            }
+
+            &Button svg {
+                &:first-child {
+                    opacity: 0;
+                }
+    
+                &:last-child {
+                    opacity: 1;
+                }
+            }
+
+            &ProgressSubstrate {
+                stroke: @c-white;
+            }
+        }
+    }
+
+    &-sound {
+        display: none;
+    }
+
+    &-controls {
+        flex-shrink: 0;
+        width: @scale * 160;
+        height: @scale * 160;
+        border-radius: 100%;
+        background-color: @c-red;
+        position: relative;
+        transition: background-color @ease;
+
+        @media @mobile {
+            width: @scale * 60;
+            height: @scale * 60;
+        }
+
+        .isDesktop &:hover {
+            background-color: transparent;
+        }
+
+        &:active @{CommonAudioPlayer}-controlsButton {
+            transform: scale(.9);
+        }
+
+        &Button {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 20;
+            transition: transform @ease;
+    
+            svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: opacity @ease;
+    
+                &:first-child {
+                    width: @scale * 70;
+                    height: @scale * 70;
+                    margin-left: @scale * 5;
+
+                    @media @mobile {
+                        width: @scale * 30;
+                        height: @scale * 30;
+                        margin-left: @scale * 3;
+                    }
+                }
+    
+                &:last-child {
+                    width: @scale * 50;
+                    height: @scale * 50;
+                    opacity: 0;
+
+                    @media @mobile {
+                        width: @scale * 20;
+                        height: @scale * 20;
+                    }
+                }
+            }
+        }
+    
+        &Progress, &ProgressSubstrate {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 100%;
+    
+            path {
+                stroke-width: 10;
+            }
+        }
+    
+        &Progress {
+            z-index: 10;
+            stroke: @c-red;
+    
+            &Substrate {
+                stroke: @c-red;
+                transition: stroke @ease;
+            }
+        }
+    }
+
+    &-file {
+        width: @scale * 300;
+        margin-left: @scale * 20;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        letter-spacing: 0;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            width: @scale * 130;
+            margin-left: @scale * 10;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupNote: .MemoriesPopup-note;
+
+@{MemoriesPopupNote} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: @scale * 1120;
+    padding: @scale * 40;
+    border-radius: @scale * 20;
+    background-color: @c-black;
+
+    @media @mobile {
+        width: @scale * 560;
+        padding: @scale * 20;
+    }
+
+    &Question, &Answer {
+        color: @c-white;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 3;
+        text-transform: uppercase;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            float: left;
+            width: @scale * 60;
+            height: @scale * 60;
+            border-radius: 100%;
+
+            @media @mobile {
+                display: none;
+            }
+        }
+    }
+
+    &Question {
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        &:before {
+            margin: -@scale * 15 @scale * 60 0 0;
+            background-color: @c-red;
+        }
+    }
+
+    &Answer:before {
+        margin: -@scale * 6 @scale * 60 0 0;
+        background-color: @c-white;
+    }
+}

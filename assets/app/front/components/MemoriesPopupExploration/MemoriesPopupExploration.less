@@ -1,0 +1,196 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupExploration: .MemoriesPopup-exploration;
+
+@{MemoriesPopupExploration} {
+    flex-shrink: 0;
+    width: @scale * 1600;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    background-color: @c-black;
+
+    @media @mobile {
+        width: @scale * 800;
+    }
+
+    &.Loaded @{MemoriesPopupExploration} {
+        &Image {
+            .isDesktop & {
+                visibility: visible;
+            }
+        }
+
+        &Background, &Loader {
+            .isDesktop & {
+                display: none;
+            }
+        }
+    }
+
+    &Background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url('@{static_url}img/popups/5/sequence/solar-1.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        .isDesktop & {
+            opacity: .2;
+        }
+    }
+
+    &Loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: none;
+        transform: translate(-50%, -50%);
+
+        .isDesktop & {
+            display: block;
+        }
+
+        &Inner {
+            color: @c-white;
+            font-size: @scale * 16;
+            line-height: 20 / 16;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: @fw-bold;
+        }
+
+        &Spinner {
+            width: @scale * 80;
+            height: @scale * 80;
+            margin: 0 auto @scale * 24;
+            position: relative;
+
+            &Line {
+                position: absolute;
+                left: @scale * 37;
+                bottom: 0;
+                width: @scale * 7;
+                height: @scale * 14;
+                background-color: transparent;
+                transform-origin: center -@scale * 25;
+                animation: spinner-fade 1s infinite linear;
+
+                .setDelay(@i: 0) when (@i < 15) {
+                    &:nth-child(@{i}) {
+                        @delay: @i * .080s;
+                        @rotation: @i * 30deg;
+
+                        animation-delay: @delay;
+                        transform: rotate(@rotation);
+                    }
+    
+                    .setDelay(@i + 1);
+                }
+
+                .setDelay();
+            }
+
+            @keyframes spinner-fade {
+                0% {
+                    background-color: @c-white;
+                }
+    
+                100% {
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    &Image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        opacity: 0;
+
+        .isDesktop & {
+            visibility: hidden;
+        }
+
+        &.isShow {
+            opacity: 1;
+        }        
+    }
+
+    &Footer {
+        position: absolute;
+        left: @scale * 40;
+        right: @scale * 40;
+        bottom: @scale * 40;
+        text-transform: uppercase;
+        z-index: 10;
+
+        @media @mobile {
+            left: @scale * 20;
+            right: @scale * 20;
+            bottom: @scale * 20;
+        }
+
+        &Inner {
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+
+    &Title, &Caption {
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+
+        div {
+            display: inline-block;
+        }
+    }
+
+    &Title {
+        margin-bottom: -@scale * 10;
+        color: @c-red;
+        letter-spacing: -@scale * 3;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            margin-bottom: -@scale * 5;
+        }
+    }
+
+    &Caption {
+        color: @c-white;
+        letter-spacing: -@scale * 4;
+    }
+
+    &File {
+        margin: 0 0 -@scale * 2 @scale * 16;
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            margin: 0 0 -@scale * 2 @scale * 10;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+}

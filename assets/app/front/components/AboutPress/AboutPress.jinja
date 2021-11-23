@@ -1,0 +1,26 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro AboutPress() %}
+    <div class="AboutPress isAnimated">
+        <div class="AboutPress-inner">
+            <div class="AboutPress-title">Press</div>
+            <p class="AboutPress-text">For press inquiries please contact Danil Krivoruchko via <a href="mailto: danil@myshli.com" target="_blank" class="AboutPress-link">→ email</a></p>
+            <div class="AboutPress-image">
+                <img src="{{ static('img/about/film.jpg') }}" alt="">
+            </div>
+            <p class="AboutPress-text">The film can also be played and embedded via Vimeo link<br><br><a href="https://vimeo.com/467342474" target="_blank" class="AboutPress-link">→ https://vimeo.com/467342474</a></p>
+        </div>
+        <div class="AboutPress-buttons">
+            <div class="AboutPress-buttonsItemWrapper">
+                <a href="mailto: danil@myshli.com" class="AboutPress-buttonsItem">
+                    <span>Contact</span>
+                </a>
+            </div>
+            <div class="AboutPress-buttonsItemWrapper">
+                <a href="{{ static('img/about/HIRES.zip') }}" download class="AboutPress-buttonsItem">
+                    <span>Hi res visuals</span>
+                </a>
+            </div>
+        </div>
+    </div> 
+{% endmacro %}

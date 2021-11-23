@@ -1,0 +1,7 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupModel(block={}) %}
+    <div class="MemoriesPopup-model isAnimated">
+        {{ block.embed | safe }}
+    </div>
+{% endmacro %}

@@ -1,0 +1,103 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@AboutCredits: .AboutCredits;
+
+.u-creditsText {
+    font-size: @scale * 16;
+    line-height: 20 / 16;
+    text-transform: uppercase;
+
+    @media @mobile {
+        font-size: @scale * 8;
+        line-height: 15 / 8;
+    }
+}
+
+@{AboutCredits} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media @mobile {
+        justify-content: flex-start;
+    }
+
+    &-inner {
+        margin-bottom: @scale * 30;
+
+        @media @mobile {
+            margin-bottom: @scale * 15;
+        }
+    }
+
+    &-title {
+        margin-bottom: @scale * 40;
+        color: @c-red;
+        font-size: @scale * 72;
+        line-height: 60 / 72;
+        letter-spacing: -@scale * 3;
+        text-transform: uppercase;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+    
+        @media @mobile {
+            margin-bottom: @scale * 10;
+            font-size: @scale * 25;
+            line-height: 30 / 25;
+        }
+    }
+
+    &-listItem {
+        .u-creditsText();
+
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: @scale * 25;
+
+        @media @mobile {
+            margin-bottom: @scale * 5;
+        }
+
+        &Position {
+            width: @scale * 200;
+            color: @c-red;
+            font-weight: @fw-medium;
+            font-family: @font-secondary;
+            
+            @media @mobile {
+                width: @scale * 150;
+            }
+        }
+
+        &Names {
+            width: @scale * 170;
+
+            @media @mobile {
+                width: @scale * 100;
+            }
+
+            &Title {
+                display: block;
+                margin-top: -@scale * 2;
+                color: @c-white;
+                transition: color @ease;
+
+                .isDesktop &:hover {
+                    color: @c-red;
+                }
+            }
+        }
+    }
+
+    &-period {
+        .u-creditsText();
+
+        width: @scale * 170;
+        color: @c-white;
+
+        @media @mobile {
+            width: @scale * 100;
+        }
+    }
+}

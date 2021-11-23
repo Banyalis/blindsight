@@ -1,0 +1,56 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupInfo: .MemoriesPopup-info;
+
+@{MemoriesPopupInfo} {
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+    width: @scale * 480;
+    padding: @scale * 40;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    background-color: @c-black;
+
+    @media @mobile {
+        width: @scale * 240;
+        padding: @scale * 15;
+    }
+
+    &Image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        img {
+            .u-ObjectFit();
+        }
+    }
+
+    &Text {
+        position: relative;
+        color: @c-white;
+        font-size: @scale * 32;
+        line-height: 30 / 32;
+        letter-spacing: -1px;
+        text-transform: uppercase;
+
+        @media @mobile {
+            font-size: @scale * 16;
+            line-height: 14 / 16;
+        }
+
+        &Link {
+            color: @c-red;
+            transition: color @ease;
+
+            .isDesktop &:hover {
+                color: @c-white;
+            }
+        }
+    }
+}

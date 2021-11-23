@@ -1,0 +1,95 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupResources: .MemoriesPopup-resources;
+
+.u-resourcesText(@color) {
+    color: @color;
+    font-size: @scale * 16;
+    line-height: 20 / 16;
+    font-weight: @fw-bold;
+
+    @media @mobile {
+        font-size: @scale * 8;
+        line-height: 10 / 8;
+    }
+}
+
+@{MemoriesPopupResources} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: @scale * 480;
+    padding: @scale * 30 @scale * 40 @scale * 40;
+    border-radius: @scale * 20;
+    background-color: @c-red;
+    text-transform: uppercase;
+
+    @media @mobile {
+        width: @scale * 400;
+        padding: @scale * 30 @scale * 20;
+    }
+
+    &Header {
+        color: @c-black;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 4;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+    }
+
+    &Caption {
+        color: @c-white;
+    }
+
+    &ListItem {
+        margin-bottom: @scale * 30;
+        padding-top: @scale * 23;
+        position: relative;
+
+        @media @mobile {
+            margin-bottom: @scale * 20;
+            padding-top: @scale * 15;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &Line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: @c-white;
+        }
+
+        &Title {
+            .u-resourcesText(@c-white);
+        }
+
+        &Value {
+            margin-top: -@scale * 30;
+            color: @c-black;
+            font-size: @scale * 228;
+            line-height: 1;
+            letter-spacing: -@scale * 16;
+
+            @media @mobile {
+                margin-top: -@scale * 20;
+                font-size: @scale * 150;
+            }
+        }
+    }
+
+    &Text {
+        .u-resourcesText(@c-black);
+    }
+}

@@ -1,0 +1,345 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+@import (reference) "~front/fonts";
+
+.u-loaderText() {
+    font-size: @scale * 16;
+    line-height: 20 / 16;
+    text-transform: uppercase;
+}
+
+*,
+*:after,
+*:before {
+    outline: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+html {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+body {
+    background-color: @c-black;
+    overflow: hidden;
+    overscroll-behavior: none;
+    cursor: none;
+    font-size: 0;
+    font-weight: @fw-regular;
+    font-family: @font-primary;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern";
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern=1";
+    -moz-font-feature-settings: "kern";
+    -ms-font-feature-settings: "kern" 1;
+
+    &.enabledScroll {
+        overflow: auto;
+    }
+}
+
+a {
+    cursor: none;
+    text-decoration: none;
+}
+
+button {
+    outline: none;
+}
+
+&::selection {
+    background-color: @c-red;
+    color: @c-white;
+}
+
+.Cursor {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: @scale * 60;
+    height: @scale * 60;
+    border: 2px solid @c-red;
+    border-radius: 100%;
+    z-index: 9999;
+    user-select: none;
+    pointer-events: none;
+    transform: scale(.5);
+    transition: border-color @ease, background-color @ease, transform @ease;
+
+    .isDesktop & {
+        display: flex;
+    }
+
+    &.isDefault {
+        border-color: @c-black;
+        background-color: @c-black;
+        transform: scale(.2);
+    }
+
+    &.isRedZone {
+        border-color: @c-black;
+
+        svg {
+            fill: @c-black;
+        }
+    }
+    
+    &.isIncrease {
+        transform: scale(.7);
+
+        &.isPressed {
+            transform: scale(.6);
+        }
+    }
+
+    &.isPlay,
+    &.isPause,
+    &.isZoom,
+    &.isClose,
+    &.isNext,
+    &.isMemories {
+        transform: scale(1);
+
+        &.isPressed {
+            transform: scale(.9);
+        }
+    }
+
+    &.isPlay .Cursor-iconPlay,
+    &.isPause .Cursor-iconPause,
+    &.isZoom .Cursor-iconZoom,
+    &.isClose .Cursor-iconClose,
+    &.isNext .Cursor-iconNext,
+    &.isMemories .Cursor-iconMemories {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
+
+    &-icon {
+        position: absolute;
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+        transition: opacity @ease, transform .4s ease-in-out;
+        
+        &Play svg {
+            width: @scale * 25;
+            height: @scale * 24;
+        }
+
+        &Pause svg {
+            width: @scale * 16;
+            height: @scale * 20;
+        }
+
+        &Zoom svg {
+            width: @scale * 32;
+            height: @scale * 32;
+        }
+
+        &Close svg {
+            width: @scale * 26;
+            height: @scale * 26;
+        }
+
+        &Next svg {
+            width: @scale * 30;
+            height: @scale * 27;
+        }
+
+        &Memories svg {
+            width: @scale * 29;
+            height: @scale * 25;
+        }
+
+        svg {
+            fill: @c-red;
+            transition: fill @ease;
+        }
+    }
+}
+
+.HorizontalPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    scrollbar-width: none;
+
+    .isTablet &, .isMobile & {
+        right: 0;
+        overflow-x: scroll;
+
+        &.disabledScroll {
+            overflow: hidden;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.Orientation-alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: @scale * 15;
+    background-color: @c-brown;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity @ease, visibility @ease;
+
+    &.isShow {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &Icon {
+        width: @scale * 120;
+        height: @scale * 180;
+        margin-bottom: @scale * 25;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &Title {
+        max-width: @scale * 480;
+        color: @c-white;
+        font-size: @scale * 30;
+        line-height: 30 / 30;
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+
+.Loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: @c-red;
+    z-index: 4000;
+
+    &-bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0%;
+        height: 100%;
+        background-color: @c-brown;
+
+        @media @mobile {
+            width: 100%;
+            height: 0%;
+        }
+    }
+
+    &-inner {
+        position: absolute;
+        left: @scale * 30;
+        bottom: @scale * 50;
+        z-index: 100;
+        color: @c-white;
+
+        @media @mobile {
+            left: @scale * 20;
+            bottom: @scale * 20;
+        }
+    }
+
+    &-title {
+        .u-loaderText();
+
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            font-size: @scale * 10;
+            line-height: 20 / 10;
+        }
+    }
+
+    &-percentage {
+        margin-bottom: @scale * 60;
+        font-size: @scale * 320;
+        line-height: 248 / 320;
+        letter-spacing: -@scale * 28;
+
+        @media @mobile {
+            margin-bottom: @scale * 20;
+            font-size: @scale * 120;
+            line-height: 100 / 120;
+            letter-spacing: -@scale * 10;
+        }
+    }
+
+    &-text {
+        .u-loaderText();
+
+        width: @scale * 480;
+        font-weight: @fw-medium;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            width: @scale * 180;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+}
+
+.PageSection {
+    transition: opacity .5s ease-in-out;
+
+    &.isShow {
+        opacity: 0;
+    }
+}
+
+.overflowLock {
+    overflow: hidden !important;
+}
+
+.Content.isLandscape,
+.Content.isPortrait {
+    display: none;
+}
+
+.NeedFixOnPopup {
+    top: 0;
+    min-width: 100%;
+    z-index: 9999;
+    will-change: top;
+
+    .isMobile & {
+        min-width: 100%;
+    }
+}
+
+.FixedOnPopup {
+    position: fixed !important;
+    left: 0 !important;
+    width: 100% !important;
+}

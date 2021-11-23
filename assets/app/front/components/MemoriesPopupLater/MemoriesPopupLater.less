@@ -1,0 +1,41 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupLater: .MemoriesPopup-later;
+
+@{MemoriesPopupLater} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: @scale * 480;
+    padding: @scale * 45 @scale * 40;
+    border-radius: @scale * 20;
+    background-color: @c-black;
+    text-transform: uppercase;
+
+    &Title {
+        color: @c-red;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 3;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+    }
+
+    &Text {
+        color: @c-white;
+        font-size: @scale * 30;
+        line-height: 30 / 30;
+        letter-spacing: -1px;
+
+        @media @mobile {
+            font-size: @scale * 15;
+            line-height: 15 / 15;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="180px" viewBox="0 0 120 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="MASTER" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="T:-ROTATE-IPAD" transform="translate(-320.000000, -360.000000)">
+            <g id="Icon" transform="translate(320.000000, 360.000000)">
+                <rect id="Rectangle" stroke="#FF0000" stroke-width="4" fill="#141017" x="2" y="2" width="116" height="176" rx="10"></rect>
+                <path d="M60,60 C76.568,60 90,73.432 90,90 L90,90 L86,90 C86,75.664 74.336,64 60,64 C45.664,64 34,75.664 34,90 C34,104.336 45.664,116 60,116 L60,116 L60,120 C43.432,120 30,106.568 30,90 C30,73.432 43.432,60 60,60 Z M97.6776695,83.9497475 L100.506097,86.7781746 L87.7781746,99.5060967 L75.0502525,86.7781746 L77.8786797,83.9497475 L87.7781746,93.8492424 L97.6776695,83.9497475 Z" id="Combined-Shape" fill="#FF0000"></path>
+            </g>
+        </g>
+    </g>
+</svg>

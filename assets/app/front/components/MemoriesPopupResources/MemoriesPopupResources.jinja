@@ -1,0 +1,28 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupResources(popup={}) %}
+    <div class="MemoriesPopup-resources Cursor-redZone isAnimated">
+        <div class="MemoriesPopup-resourcesHeader">
+            {% if popup.resourcesTitle %}
+                <div class="MemoriesPopup-resourcesTitle">Memory:{{ popup.resourcesTitle }}</div>
+                <div class="MemoriesPopup-resourcesCaption">Logged Resources</div>
+            {% else %}
+                <div class="MemoriesPopup-resourcesCaption">Thank you!</div>
+            {% endif %}
+        </div>
+        {% if popup.resources %}
+            <ul class="MemoriesPopup-resourcesList">
+                {% for item in popup.resources %}
+                    <li class="MemoriesPopup-resourcesListItem">
+                        <div class="MemoriesPopup-resourcesListItemLine"></div>
+                        <div class="MemoriesPopup-resourcesListItemTitle">{{ item.title }}:</div>
+                        <div class="MemoriesPopup-resourcesListItemValue">{{ item.value }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if popup.resources | length < 1 %}
+            <p class="MemoriesPopup-resourcesText">This was quite the enthralling journey. When I compare where I am today with where I was at the beginning of this project, it’s striking how approaching challenges that seem, at first, insurmountable, has become much easier. And I got the opportunity to meet and work with a huge number of incredibly talented people. After viewing every shot probably close to 500 times, I can’t tell anymore what the result actually turned out to be, but the process of getting there was undoubtedly worth it.<br><br>Thank you to you all!</p>
+        {% endif %}
+    </div>
+{% endmacro %}

@@ -1,0 +1,17 @@
+{% import 'front/utils/macros.jinja' as macros %}
+{% extends 'front/pages/Memories/MemoriesSection.jinja' %}
+
+{% block social %}
+    <meta name="description" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="{{ popup.shareImage }}"/>
+    <meta property="og:image:width" content="1440"/>
+    <meta property="og:image:height" content="640"/>
+    <meta property="og:url" content="{{ request.build_absolute_uri() }}">
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+{% endblock %}
+
+{% block section_content %}
+    {% include 'front/pages/MemoriesPopup/MemoriesPopup.jinja' %}
+{% endblock %}

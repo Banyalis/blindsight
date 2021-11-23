@@ -1,0 +1,29 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesSection: .MemoriesSection;
+
+@{MemoriesSection} {
+    @media @mobile {
+        padding: @scale * 60 0 0;
+    }
+
+    .CommonVideo-background {
+        .isTablet &, .isMobile {
+            opacity: .4;
+        }
+
+        .isTablet & {
+            left: -@scale * 80;
+            bottom: -@scale * 300;
+        }
+    }
+
+    .NeedFixOnPopup {
+        // z-index: inherit;
+
+        @media @mobile {
+            height: 100%;
+        }
+    }
+}

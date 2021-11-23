@@ -1,0 +1,19 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% from 'front/components/CommonVideoPlayer/CommonVideoPlayer.jinja' import CommonVideoPlayer %}
+
+{% macro CommonVideoPopup(data={}) %}
+    <div class="CommonVideoPopup">
+        <a href="" class="CommonVideoPopup-close">
+            {% call macros.svgSprite("i-close") %}{% endcall %}
+        </a>
+        {# <div class="CommonVideoPopup-inner" data-video-popup="{{ static('videos/404.mp4') }}">
+            {{ CommonVideoPlayer(mods=['isPopupVideoPlayer']) }}
+        </div> #}
+        <div class="CommonVideoPopup-inner">
+            <div class="plyr__video-embed VimeoPlayer">
+                <iframe src="https://player.vimeo.com/video/467342474?title=0&byline=0&portrait=0" width="100%" height="100%" allowfullscreen allowtransparency frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

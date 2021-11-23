@@ -1,0 +1,11 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro CommonVideoBackground(data={}) %}
+    <div class="CommonVideo-background">
+        <video preload="auto" autoplay loop muted canplaythrough playsinline poster="{{ data.backgroundVideoPoster }}" data-src="{{ data.backgroundVideo }}"></video>
+        <picture>
+            <source srcset="{{ data.backgroundImageMobile}}" media="(max-width: 767px)">
+            <img data-lazy-load data-src="{{ data.backgroundImageDesktop }}" alt="">
+        </picture>
+    </div>
+{% endmacro %}

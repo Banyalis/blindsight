@@ -1,0 +1,5 @@
+# Browsers that we support
+>0.25%
+ie >= 9
+last 2 versions
+not op_mini all

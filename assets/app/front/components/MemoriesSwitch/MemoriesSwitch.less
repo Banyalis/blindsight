@@ -1,0 +1,48 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesSwitch: .MemoriesSwitch;
+
+@{MemoriesSwitch} {
+    position: fixed;
+    right: @scale * 60;
+    bottom: @scale * 80;
+    transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
+
+    @media @mobile {
+        display: none;
+    }
+
+    &.isHidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &-item {
+        display: block;
+        width: @scale * 40;
+        height: @scale * 40;
+
+        &:first-child {
+            height: @scale * 44;
+            margin-bottom: @scale * 36;
+        }
+
+        .isDesktop &:hover svg,
+        &.isActive svg {
+            stroke: @c-red;
+        }
+
+        &.isActive,
+        &.isDisabled {
+            pointer-events: none;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            stroke: @c-white;
+            transition: stroke @ease;
+        }
+    }
+}

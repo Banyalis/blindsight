@@ -1,0 +1,34 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupCredits(block={}) %}
+    <div class="MemoriesPopup-credits isAnimated">
+        <div class="MemoriesPopup-creditsTitle">{{ block.title }}</div>
+        <div class="MemoriesPopup-creditsFooter">
+            <div class="MemoriesPopup-creditsList">
+                {% for item in block.credits %}
+                    <div class="MemoriesPopup-creditsListItem">
+                        <div class="MemoriesPopup-creditsListItemCharacter">{{ item.character }}</div>
+                        <div class="MemoriesPopup-creditsListItemVoiceds">
+                            {% for item in item.voiced %}
+                                <div class="MemoriesPopup-creditsListItemVoicedsItem">{{ item.title }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="MemoriesPopup-creditsListTitle">Voiceover</div>
+            <div class="MemoriesPopup-creditsList">
+                {% for item in block.list %}
+                    <div class="MemoriesPopup-creditsListItem">
+                        <div class="MemoriesPopup-creditsListItemCharacter">{{ item.character }}</div>
+                        <div class="MemoriesPopup-creditsListItemVoiceds">
+                            {% for item in item.voiced %}
+                                <div class="MemoriesPopup-creditsListItemVoicedsItem">{{ item.title }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

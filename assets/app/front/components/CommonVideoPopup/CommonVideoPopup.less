@@ -1,0 +1,133 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@CommonVideoPopup: .CommonVideoPopup;
+
+@{CommonVideoPopup} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: @scale * 140 0 @scale * 50;
+    background-color: @c-black;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s ease-in-out, visibility .4s ease-in-out;
+
+    @media @mobile {
+        padding: @scale * 60 0 @scale * 30;
+    }
+
+    &.isOpen {
+        opacity: 1;
+        visibility: visible;
+
+        @{CommonVideoPopup}-inner {
+            visibility: visible;
+        }
+    }
+
+    &-close {
+        position: absolute;
+        top: @scale * 35;
+        right: @scale * 35;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: @scale * 60;
+        height: @scale * 60;
+        border: 2px solid @c-white;
+        border-radius: 100%;
+        z-index: 10;
+        color: @c-white;
+        transition: border-color @ease, color @ease, transform .4s ease-in-out;
+
+        @media @mobile {
+            top: @scale * 10;
+            right: @scale * 10;
+            width: @scale * 35;
+            height: @scale * 35;
+        }
+
+        .isDesktop & {
+            &:hover {
+                border-color: @c-red;
+                color: @c-red;
+                transform: rotate(360deg);
+            }
+
+            &:active {
+                transform: scale(.9);
+            }
+        }
+
+        svg {
+            width: @scale * 25;
+            height: @scale * 25;
+            fill: currentColor;
+
+            @media @mobile {
+                width: @scale * 12;
+                height: @scale * 12;
+            }
+        }
+    }
+
+    &-inner {
+        height: 100%;
+        visibility: hidden;
+    }
+
+    .plyr__controls {
+        align-items: flex-end;
+
+        @media @mobile {
+            align-items: center;
+
+            .plyr__progress__container {
+                margin-top: @scale * 3;
+            }
+        }
+
+        &__item.plyr__time {
+            width: @scale * 250;
+            margin-left: 0;
+            padding: 0 @scale * 20 !important;
+            font-size: @scale * 72;
+            line-height: 1;
+            letter-spacing: -@scale * 4;
+
+            @media @mobile {
+                width: @scale * 70;
+                padding: 0 @scale * 10 !important;
+                font-size: @scale * 20 !important;
+                line-height: 18 / 20 !important;
+                letter-spacing: -@scale * 2 !important;
+            }
+    
+            &:last-child:before {
+                display: none;
+            }
+        }
+
+        input {
+            cursor: none;
+        }
+    }
+    
+    .plyr:fullscreen {
+        cursor: default !important;
+
+        .plyr__controls {
+            padding: 20px !important;
+        }
+
+        input {
+            cursor: default !important;
+        }
+    }
+
+    --plyr-color-main: @c-red;
+}

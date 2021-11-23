@@ -1,0 +1,378 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupGallery: .MemoriesPopup-gallery;
+
+.u-galleryNav() {
+    display: flex;
+
+    &Prev,
+    &Next {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: @scale * 60;
+        height: @scale * 60;
+        border: 2px solid @c-red;
+        border-radius: 100%;
+        transition: background-color @ease, transform @ease;
+
+        @media @mobile {
+            width: @scale * 40;
+            height: @scale * 40;
+        }
+
+        .isDesktop & {
+            &:hover {
+                background-color: @c-red;
+
+                svg {
+                    fill: @c-black;
+                }
+            }
+            
+            &:active {
+                transform: scale(.9);
+            }
+        }
+
+        svg {
+            width: @scale * 30;
+            height: @scale * 25;
+            fill: @c-red;
+            transition: fill @ease;
+
+            @media @mobile {
+                width: @scale * 25;
+                height: @scale * 15;
+            }
+        }
+    }
+
+    &Prev {
+        margin-right: @scale * 20;
+
+        @media @mobile {
+            margin-right: @scale * 10;
+        }
+
+        svg {
+            transform: rotate(-180deg);
+        }
+    }
+}
+
+@{MemoriesPopupGallery} {
+    height: 100%;
+    border-radius: @scale * 20;
+    overflow: hidden;
+    transform: translateZ(0);
+
+    .isDesktop &@{MemoriesPopupGallery}ZoomOpen:hover @{MemoriesPopupGallery}ItemInner {
+        transform: scale(1.05);
+    }
+
+    .slick-slide {
+        transition: opacity .5s ease-in-out 0s !important;
+    }
+
+    &Wrapper {
+        flex-shrink: 0;
+        width: @scale * 1120;
+        position: relative;
+        background-color: @c-black;
+
+        @media @mobile {
+            width: @scale * 560;
+        }
+
+        &.isLargeSize {
+            width: @scale * 2080;
+
+            @media @mobile {
+                width: @scale * 1040;
+            }
+        }
+
+        &.isMediumSize {
+            width: @scale * 1600;
+
+            @media @mobile {
+                width: @scale * 800;
+            }
+        }
+
+        &.isSmallSize {
+            width: @scale * 960;
+
+            @media @mobile {
+                width: @scale * 480;
+            }
+        }
+
+        &.isBlackTheme @{MemoriesPopupGallery} {
+            &Caption, &File {
+                color: @c-black;
+            }
+        }
+
+        &.isCentered @{MemoriesPopupGallery}Item {
+            display: flex;
+            align-items: center;
+            padding: 0 @scale * 40;
+
+            @media @mobile {
+                padding: 0 @scale * 20;
+            }
+
+            &Inner {
+                width: 100%;
+                height: @scale * 520;
+                margin-top: -@scale * 50;
+                box-shadow: 0 20px 80px fade(@c-black, 50%);
+
+                @media @mobile {
+                    height: @scale * 260;
+                    margin-top: -@scale * 25;
+                }
+            }
+        }
+
+        &.isVideoGallery @{MemoriesPopupGallery}Item img {
+            object-fit: cover;
+
+            .isDesktop & {
+                display: none;
+            }
+        }
+
+        .slick-track, .slick-list {
+            height: 100%;
+        }
+    }
+
+    &Overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        .isDesktop & {
+            display: none;
+        }
+    }
+
+    &Item {
+        height: 100%;
+
+        &.isBackgroundGrid {
+            .isDesktop & {
+                background-size: @scale * 80 @scale * 80, 0 0, @scale * 40 @scale * 40, @scale * 40 @scale * 40 !important;
+            }
+        }
+        
+        &Inner {
+            height: 100%;
+
+            &.isTypeCover img {
+                object-fit: cover;
+            }
+
+            // &.isHidden {
+            //     video {
+            //         display: none;
+            //     }
+    
+            //     img {
+            //         display: block;
+            //     }
+            // }
+
+            img {
+                .u-ObjectFit(contain);
+            }
+
+            video {
+                .u-ObjectFit();
+
+                .isTablet &, .isMobile & {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &Footer {
+        position: absolute;
+        left: @scale * 40;
+        right: @scale * 40;
+        bottom: @scale * 40;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        pointer-events: none;
+
+        @media @mobile {
+            left: @scale * 20;
+            right: @scale * 20;
+            bottom: @scale * 20;
+        }
+    }
+
+    &Info {
+        pointer-events: all;
+        text-transform: uppercase;
+
+        &Inner {
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+
+    &Title, &Caption {
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+    }
+
+    &Title div, &Caption div {
+        display: inline-block;
+    }
+
+    &Title {
+        margin-bottom: -@scale * 10;
+        color: @c-red;
+        letter-spacing: -@scale * 3;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            margin-bottom: -@scale * 5;
+        }
+    }
+
+    &Caption {
+        color: @c-white;
+        letter-spacing: -@scale * 4;
+    }
+
+    &File {
+        margin: 0 0 -@scale * 2 @scale * 16;
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        white-space: nowrap;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            margin: 0 0 -@scale * 2 @scale * 10;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+
+    &Nav {
+        .u-galleryNav();
+
+        pointer-events: all;
+    }
+
+    &Zoom {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        display: none;
+        width: 100vw;
+        background-color: @c-black;
+        z-index: 20;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity @ease, visibility @ease;
+
+        .isDesktop & {
+            display: block;
+        }
+
+        &.isOpen {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &Close {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            .isTablet &, .isMobile & {
+                top: @scale * 60;
+                left: calc(100% - @scale * 120);
+                right: inherit;
+                bottom: inherit;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: @scale * 60;
+                height: @scale * 60;
+                background-color: @c-white;
+                border-radius: 100%;
+
+                @media @mobile  {
+                    top: @scale * 20;
+                    left: calc(100% - @scale * 50);
+                    width: @scale * 40;
+                    height: @scale * 40;
+                }
+            }
+
+            svg {
+                display: none;
+                height: @scale * 25;
+                fill: @c-black;
+
+                .isTablet &, .isMobile & {
+                    display: block;
+                }
+
+                @media @mobile  {
+                    height: @scale * 15;
+                }
+            }
+        }
+
+        &Inner {
+            height: 100%;
+        }
+
+        &ItemInner {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+
+            .isTablet &, .isMobile & {
+                background-size: contain;
+            }
+        }
+
+        &Nav {
+            .u-galleryNav();
+
+            position: absolute;
+            right: @scale * 40;
+            bottom: @scale * 40;
+
+            @media @mobile {
+                right: @scale * 20;
+                bottom: @scale * 20;
+            }
+        }
+    }
+}

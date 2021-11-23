@@ -1,0 +1,54 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% from 'front/components/CommonAudioPlayer/CommonAudioPlayer.jinja' import CommonAudioPlayer %}
+
+{% macro MemoriesPopupChat(block={}) %}
+    <div class="MemoriesPopup-chat
+        {% if block.largeSize == 'true' %} isLargeSize
+        {% elif block.mediumSize == 'true' %} isMediumSize
+        {% elif block.smallSize == 'true' %} isSmallSize{% endif %} isAnimated">
+        {% for item in block.chat %}
+            <div class="MemoriesPopup-chatItem
+                {% if item.theme == 'red' %} isRedTheme Cursor-redZone
+                {% elif item.theme == 'gray' %} isGrayTheme
+                {% elif item.theme == 'white' %} isWhiteTheme{% endif %}">
+                <div class="MemoriesPopup-chatItemHeader">
+                    <div class="MemoriesPopup-chatItemNumber">Message: {{ item.number }}</div>
+                    <div class="MemoriesPopup-chatItemDate">{{ item.date }}</div>
+                </div>
+                <div class="MemoriesPopup-chatItemInner">
+                    <p class="MemoriesPopup-chatItemText">↪︎{{ item.text | safe }}</p>
+                    {% if item.audio %}
+                        {{ CommonAudioPlayer(item) }}
+                    {% endif %}
+                    {% if item.image %}
+                        <div class="MemoriesPopup-chatItemImage
+                            {% if item.zoom == 'true' %} MemoriesPopup-chatItemImageZoomOpen Cursor-zoom{% endif %}
+                            {% if item.heightLimit == 'true' %} isHeightLimit{% endif %}">
+                            <img src="{{ item.image }}" alt="">
+                        </div>
+                        <div class="MemoriesPopup-chatItemImageZoom">
+                            <div class="MemoriesPopup-chatItemImageZoomClose Cursor-close">
+                                {% call macros.svgSprite("i-close") %}{% endcall %}
+                            </div>
+                            <img data-src="{{ item.imageZoom }}" alt="">
+                        </div>
+                    {% endif %}
+                    {% if item.reference == 'true' %}
+                        <a href="{{ item.referenceUrl }}" target="_blank" class="MemoriesPopup-chatItemReference">
+                            {% if item.referenceImage %}
+                                <div class="MemoriesPopup-chatItemReferenceImage">
+                                    <img src="{{ item.referenceImage }}" alt="">
+                                </div>
+                            {% endif %}
+                            <div class="MemoriesPopup-chatItemReferenceInner">
+                                <div class="MemoriesPopup-chatItemReferenceTitle">→{{ item.referenceTitle }}</div>
+                                <div class="MemoriesPopup-chatItemReferenceText">{{ item.referenceUrl }}</div>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

@@ -1,0 +1,22 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro CommonAudioPlayer(data={}) %}
+    <div class="CommonAudioPlayer">
+        <audio class="CommonAudioPlayer-sound">
+            <source src="{{ data.audio }}" type="audio/wav">
+        </audio>
+        <div class="CommonAudioPlayer-controls">
+            <div class="CommonAudioPlayer-controlsButton">
+                {% call macros.svgSprite("i-audio-play") %}{% endcall %}
+                {% call macros.svgSprite("i-audio-pause") %}{% endcall %}
+            </div>
+            <svg class="CommonAudioPlayer-controlsProgress" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <path fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+            </svg>
+            <svg class="CommonAudioPlayer-controlsProgressSubstrate" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                <path fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+            </svg>
+        </div>
+        <div class="CommonAudioPlayer-file">File→<br>{{ data.title }}</div>
+    </div>
+{% endmacro %}

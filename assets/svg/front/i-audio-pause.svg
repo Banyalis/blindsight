@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Rectangle</title>
+    <g id="MASTER" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="S:-ELEMENTS-01" transform="translate(-935.000000, -535.000000)" fill="#FF0000">
+            <g id="Audio" transform="translate(160.000000, 405.000000)">
+                <g id="Pause---Out" transform="translate(720.000000, 75.000000)">
+                    <rect id="Rectangle" x="55" y="55" width="50" height="50"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

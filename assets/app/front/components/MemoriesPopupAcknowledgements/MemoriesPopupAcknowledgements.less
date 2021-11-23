@@ -1,0 +1,123 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupAcknowledgements: .MemoriesPopup-acknowledgements;
+
+.u-acknowledgementsText(@color) {
+    color: @color;
+    font-size: @scale * 16;
+    line-height: 20 / 16;
+    font-weight: @fw-bold;
+
+    @media @mobile {
+        font-size: @scale * 8;
+        line-height: 10 / 8;
+    }
+}
+
+@{MemoriesPopupAcknowledgements} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    padding: @scale * 40;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    background: 
+        radial-gradient(transparent 3px, #111619 3px),
+        radial-gradient(transparent 3px, #111619 3px),
+        linear-gradient(fade(@c-white, 20%) 1px, transparent 1px) 0 -.5px,
+        linear-gradient(90deg, fade(@c-white, 20%) 1px, transparent 1px) -.5px 0;
+    background-color: #111619;
+
+    .isDesktop & {
+        background-size: @scale * 80 @scale * 80, 0 0, @scale * 40 @scale * 40, @scale * 40 @scale * 40;
+    }
+
+    @media @mobile {
+        padding: @scale * 20;
+    }
+
+    &Title {
+        color: @c-red;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 3;
+        text-transform: uppercase;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+
+        div {
+            display: inline-block;
+        }
+    }
+
+    &List {
+        display: flex;
+
+        &Column {
+            width: @scale * 420;
+            margin-right: @scale * 80;
+
+            @media @mobile {
+                width: @scale * 210;
+                margin-right: @scale * 40;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &Item {
+            margin-bottom: @scale * 30;
+            text-transform: uppercase;
+
+            @media @mobile {
+                margin-bottom: @scale * 20;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &Name, &Text {
+                .u-acknowledgementsText(@c-red);
+            }
+
+            &Name {
+                display: inline-flex;
+                margin-bottom: @scale * 5;
+                transition: color @ease;
+
+                .isDesktop &:hover {
+                    color: @c-white;
+                }
+            }
+
+            &Text {
+                color: @c-white;
+            }
+        }
+    }
+
+    &Owner {
+        .u-acknowledgementsText(@c-white);
+
+        position: absolute;
+        right: @scale * 40;
+        bottom: @scale * 40;
+        text-transform: uppercase;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            right: @scale * 20;
+            bottom: @scale * 20;
+        }
+    }
+}

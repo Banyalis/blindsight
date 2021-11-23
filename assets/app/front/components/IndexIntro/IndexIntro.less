@@ -1,0 +1,147 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@IndexIntro: .IndexIntro;
+
+@{IndexIntro} {
+    display: grid;
+    height: calc(var(--vh, 1vh) * 100);
+
+    @media @mobile {
+        align-items: flex-end;
+    }
+
+    &-inner {
+        max-width: @scale * 1300;
+        margin: auto;
+        overflow: hidden;
+
+        @media @mobile {
+            margin: 0;
+            padding: 0 @scale * 20 @scale * 40;
+        }
+    }
+
+    &-nav {
+        .isMobile & {
+            margin-bottom: @scale * 60;
+        }
+
+        &Item {
+            margin-bottom: @scale * 25;
+
+            @media @mobile {
+                margin-bottom: @scale * 5;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &Text {
+                margin-bottom: @scale * 10;
+                color: @c-red;
+                font-size: @scale * 60;
+                line-height: 55 / 60;
+                letter-spacing: -@scale * 2;
+                text-transform: uppercase;
+                font-weight: @fw-light;
+                font-family: @font-secondary;
+    
+                @media @mobile {
+                    margin-bottom: @scale * 5;
+                    font-size: @scale * 13;
+                    line-height: 13 / 13;
+                    letter-spacing: -1px;
+                }
+            }
+
+            &Link {
+                display: block;
+                width: 100%;
+                color: @c-white;
+                transition: color @ease;
+    
+                .isDesktop &:hover {
+                    color: @c-red;
+                }
+            }
+
+            &Inner {
+                display: flex;
+                align-items: flex-end;
+            }
+
+            &Period {
+                display: flex;
+                align-items: flex-end;
+                width: min-content;
+                margin-left: @scale * 25;
+                color: @c-white;
+                font-size: @scale * 32;
+                line-height: 30 / 32;
+                letter-spacing: -1px;
+
+                @media @mobile {
+                    margin-left: @scale * 3;
+                    font-size: @scale * 7;
+                    line-height: 6 / 7;
+                }
+
+                &:before {
+                    content: "";
+                    display: block;
+                    width: @scale * 30;
+                    height: @scale * 2;
+                    margin: 0 @scale * 10 @scale * 10 0;
+                    background-color: @c-white;
+
+                    @media @mobile {
+                        width: @scale * 7;
+                        height: 1px;
+                        margin: 0 @scale * 2 @scale * 2 0;
+                    }
+                }
+            }
+
+            svg {
+                fill: currentColor;
+            }
+        }
+    }
+
+    &-alert {
+        display: none;
+        padding: @scale * 15 @scale * 20;
+        border-radius: @scale * 5;
+        position: relative;
+        background-color: @c-red;
+
+        .isMobile & {
+            display: block;
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            right: -@scale * 9;
+            bottom: @scale * 10;
+            border-style: solid;
+            border-width: @scale * 10 0 0 @scale * 10;
+            border-color: transparent transparent transparent @c-red;
+        }
+
+        &Text {
+            color: @c-black;
+            font-size: @scale * 10;
+            line-height: 16 / 10;
+            text-transform: uppercase;
+            font-weight: @fw-bold;
+
+            &Decor {
+                border-bottom: 1px solid @c-black;
+            }
+        }
+    }
+}

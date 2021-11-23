@@ -1,0 +1,117 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupNext: .MemoriesPopup-next;
+
+@{MemoriesPopupNext} {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: @scale * 960;
+    padding: 0 @scale * 40;
+
+    @media @mobile {
+        width: @scale * 500;
+        padding: 0 @scale * 20;
+    }
+
+    &Card {
+        display: block;
+        width: 100%;
+        height: @scale * 480;
+        position: relative;
+        text-transform: uppercase;
+
+        @media @mobile {
+            height: @scale * 240;
+        }
+
+        .isDesktop &:hover {
+            &:before {
+                opacity: 1;
+            }
+
+            @{MemoriesPopupNext}-nextCardHint {
+                color: @c-red;
+            }
+        }
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: @scale * 20;
+            box-shadow: 0 20px 60px fade(@c-red, 50%);
+            opacity: 0;
+            transition: opacity @ease;
+        }
+
+        &Image {
+            height: 100%;
+            border-radius: @scale * 20;
+            overflow: hidden;
+
+            img {
+                .u-ObjectFit();
+            }
+        }
+
+        &Inner {
+            position: absolute;
+            left: @scale * 80;
+            bottom: -@scale * 90;
+
+            @media @mobile {
+                left: @scale * 40;
+                bottom: -@scale * 50;
+            }
+        }
+
+        &Caption, &Title {
+            color: @c-white;
+            font-size: @scale * 60;
+            line-height: 55 / 60;
+            letter-spacing: -@scale * 4;
+
+            @media @mobile {
+                font-size: @scale * 36;
+                line-height: 30 / 36;
+                letter-spacing: -@scale * 2;
+            }
+        }
+
+        &Caption {
+            margin-bottom: @scale * 10;
+        }
+
+        &Footer {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        &Hint {
+            margin: 0 @scale * 70 @scale * 10 @scale * 5;
+            color: @c-white;
+            font-size: @scale * 16;
+            line-height: 20 / 16;
+            font-weight: @fw-bold;
+            transition: color @ease;
+
+            @media @mobile {
+                margin: 0 @scale * 20 @scale * 5 0;
+                font-size: @scale * 8;
+                line-height: 10 / 8;
+            }
+        }
+
+        &Title {
+            color: @c-red;
+            letter-spacing: -@scale * 3;
+            font-family: @font-secondary;
+        }
+    }
+}

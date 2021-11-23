@@ -1,0 +1,281 @@
+{% from 'front/components/Header/Header.jinja' import Header %}
+{% import 'front/utils/macros.jinja' as macros %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Blindsight{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Sci fi, novel, Blindsight, space, 3D, motion, render, film, short, design, Peter Watts, future, cosmos, making of, behind the scenes, production, memories, logs, animation, spiral, development, space suits, aliens, Rorschach, Thesus, interface"/>
+
+    {% block social %}
+        <meta name="description" content=""/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="{{ static('img/fb.png') }}"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
+        <meta property="og:url" content="{{ request.build_absolute_uri() }}">
+        <meta property="og:title" content="Blindsight"/>
+        <meta property="og:description" content=""/>
+    {% endblock %}
+
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+    {# Генерируем favicon в разных форматах с помощью http://www.favicomatic.com/ #}
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ static('favicon/apple-touch-icon-57x57.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{{ static('favicon/apple-touch-icon-114x114.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ static('favicon/apple-touch-icon-72x72.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{{ static('favicon/apple-touch-icon-144x144.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ static('favicon/apple-touch-icon-60x60.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120"
+          href="{{ static('favicon/apple-touch-icon-120x120.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ static('favicon/apple-touch-icon-76x76.png') }}"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152"
+          href="{{ static('favicon/apple-touch-icon-152x152.png') }}"/>
+    <link rel="icon" type="image/png" href="{{ static('favicon/favicon-196x196.png') }}" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="{{ static('favicon/favicon-96x96.png') }}" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="{{ static('favicon/favicon-32x32.png') }}" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="{{ static('favicon/favicon-16x16.png') }}" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="{{ static('favicon/favicon-128.png') }}" sizes="128x128"/>
+    <link rel="shortcut icon" href="{{ static('favicon/favicon.ico') }}" type="image/x-icon"/>
+    <meta name="application-name" content="Blindsight"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta name="msapplication-TileImage" content="{{ static('favicon/mstile-144x144.png') }}"/>
+    <meta name="msapplication-square70x70logo" content="{{ static('favicon/mstile-70x70.png') }}"/>
+    <meta name="msapplication-square150x150logo" content="{{ static('favicon/mstile-150x150.png') }}"/>
+
+    <script>
+        var positionStickySupport = function () {
+            var el = document.createElement('a');
+            var mStyle = el.style;
+
+            mStyle.cssText = 'position:sticky;position:-webkit-sticky;position:-ms-sticky;';
+
+            return mStyle.position.indexOf('sticky') !== -1;
+        }();
+
+        var isMac = window.navigator.userAgent.indexOf('Mac') !== -1;
+        var isFirefox = window.navigator.userAgent.indexOf('Firefox') !== -1;
+        var isEdge = /Edge\/\d./i.test(navigator.userAgent);
+        var ieLTE10 = (!!window.ActiveXObject && +(/msie\s(\d+)/i.exec(navigator.userAgent)[1])) || NaN;
+        var ie11 = navigator.userAgent.indexOf('Trident/') !== -1 && (navigator.userAgent.indexOf('rv:') !== -1 || navigator.appName.indexOf('Netscape') !== -1);
+        var isIE = ieLTE10 || ie11;
+
+        document.documentElement.className += ' ' + (positionStickySupport ? 'isSticky' : 'isNotSticky');
+        document.documentElement.className += ' ' + (isMac ? 'isMac' : 'isNotMac');
+        document.documentElement.className += ' ' + (isFirefox ? 'isFirefox' : 'isNotFirefox');
+        document.documentElement.className += ' ' + (isEdge ? 'isEdge' : 'isNotEdge');
+        document.documentElement.className += ' ' + (isIE ? 'isIE' : 'isNotIE');
+    </script>
+
+    {% block meta %}{% endblock %}
+    {% block meta_fragment %}{% endblock %}
+
+    {% block static %}
+        {# Инлайним критически важные стили при загрузке #}
+        {#        <style>#}
+        {#            {% include 'js/front/init.css' %}#}
+        {#        </style>#}
+
+        <link href="{{ static(bundle('front', 'front', 'main.css')) }}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<img style="display:none" alt="" src="{{ static('svg/front.sprite.svg') }}">
+
+{% block before_content %}{% endblock %}
+
+<div class="Content {% block content_class %}{% endblock %}">
+    {% block Header %}
+        {{ Header(data=header) }}
+    {% endblock %}
+
+    <div class="Content-body">
+        <div class="Content-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+<!-- <div class="Loader">
+    <div class="Loader-inner">
+        <div class="Loader-title">Loading Memories ↪︎</div>
+        <div class="Loader-percentage">0%</div>
+        <p class="Loader-text">Sometimes we could conceive of things and still not see them, although they stood right before us.</p>
+    </div>
+    <div class="Loader-bar"></div>
+</div> -->
+
+<div class="Orientation-alert">
+    <div class="Orientation-alertIcon">
+        {% call macros.svgSprite("i-orientation") %}{% endcall %}
+    </div>
+    <div class="Orientation-alertTitle">Please rotate your device for a better experience</div>
+</div>
+
+<div class="Cursor">
+    <div class="Cursor-icon Cursor-iconPlay">
+        {% call macros.svgSprite("i-play-small") %}{% endcall %}
+    </div>
+    <div class="Cursor-icon Cursor-iconPause">
+        {% call macros.svgSprite("i-pause") %}{% endcall %}
+    </div>
+    <div class="Cursor-icon Cursor-iconZoom">
+        {% call macros.svgSprite("i-zoom") %}{% endcall %}
+    </div>
+    <div class="Cursor-icon Cursor-iconClose">
+        {% call macros.svgSprite("i-close") %}{% endcall %}
+    </div>
+    <div class="Cursor-icon Cursor-iconNext">
+        {% call macros.svgSprite("i-next") %}{% endcall %}
+    </div>
+    <div class="Cursor-icon Cursor-iconMemories">
+        {% call macros.svgSprite("i-arrow") %}{% endcall %}
+    </div>
+</div>
+
+{% block after_content %}{% endblock %}
+
+<script>
+    {% block data %}
+        window.app = {
+            state: {},
+            data: {},
+            settings: {
+                staticUrl: '{{ STATIC_URL }}',
+                mediaUrl: '{{ MEDIA_URL }}',
+                urls: {},
+                baseFontSize: 1000, //same value used in const.less!
+                screenWidth: document.documentElement.clientWidth,
+                isMobile: {{ isMobile(request)|jsonify }},
+                isTablet: {{ isTablet(request)|jsonify }}
+            }
+        };
+    {% endblock %}
+    //auto site zoom
+    (function () {
+        var addEvent = function (object, type, callback) {
+            if (object == null || typeof (object) == 'undefined') {
+                return;
+            }
+            if (object.addEventListener) {
+                object.addEventListener(type, callback, false);
+            } else if (object.attachEvent) {
+                object.attachEvent('on' + type, callback);
+            } else {
+                object['on' + type] = callback;
+            }
+        };
+
+        var applyScale = function (event) {
+            //same value used in conts.less
+
+            // if function called from window resize event we need to check against
+            // zoom on mobile. When zooming we don't need to apply scale. So if the
+            // device width hasn't changed, then it was a zoom and we do nothing
+            if (event && document.documentElement.clientWidth === window.app.settings.screenWidth) {
+                return;
+            }
+
+            window.app.settings.screenWidth = document.documentElement.clientWidth;
+
+            var ww;
+            if (isIE || isEdge) {
+                ww = document.documentElement.clientWidth;
+            } else {
+                ww = window.innerWidth;
+            }
+
+            var baseFontSize = window.app.settings.baseFontSize;
+            var w;
+
+            if (ww >= 1920) {
+                w = ww;
+            }
+
+            if (ww >= 768 && ww < 1920) {
+               w = 1920;
+            }
+
+            if (ww <= 767) {
+                w = ww;
+            }
+
+            if (ww <= 500) {
+                w = 320;
+            }
+
+            //IE and Edge has fair rem support, so weuse zoom instead
+            if (isIE || isEdge) {
+                var scale = Math.min(ww / w, 1);
+                document.body.style.zoom = scale;
+                document.getElementsByClassName('Content')[0].style.marginLeft = Math.round(ww - scale * ww) / scale + 'px';
+                document.getElementsByClassName('Footer')[0].style.marginLeft = Math.round(ww - scale * ww) / scale + 'px';
+            } else {
+                document.documentElement.style.fontSize = (baseFontSize * ww / w) + 'px';
+            }
+        };
+
+        addEvent(window, 'resize', applyScale);
+
+        applyScale();
+
+        setTimeout(applyScale, 17);
+        setTimeout(applyScale, 50);
+        setTimeout(applyScale, 100);
+        setTimeout(applyScale, 300);
+        setTimeout(applyScale, 1000);
+    })();
+</script>
+
+<script>
+    window.onYouTubeIframeAPIReady = function () {
+        window.app.state.youtubePlayerAPIReady = true;
+
+        //if app.vent is not ready yet we will trigger event later, on app.js initialize
+        window.app.vent && window.app.vent.trigger('youtube-ready');
+    };
+
+
+    window.onGoogleMapsAPIReady = function () {
+        window.app.state.googleMapsAPIReady = true;
+
+        //if app.vent is not ready yet we will trigger event later, on app.js initialize
+        window.app.vent && window.app.vent.trigger('google-maps-ready');
+    };
+</script>
+
+{% block body %}
+{% endblock %}
+
+{% block libs %}
+    {# Загружаем jquery с CDN Google, если он не доступен загружаем с своего сервера #}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ static ('custom_libs/jquery.min.js') }}"><\/script>');</script>
+
+    {#    <script src="{{ static(bundle('front', 'libs.js')) }}"></script>#}
+    <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.8.2.js"></script>
+{% endblock %}
+
+<script>
+    //This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</script>
+
+
+<script src="{{ static(bundle('front', 'front', 'main.js')) }}" async></script>
+
+{# {% if not DEBUG %}
+    {% include 'Analytics.jinja' %}
+{% endif %} #}
+{% include 'Analytics.jinja' %}
+</body>
+</html>

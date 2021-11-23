@@ -1,0 +1,97 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@AboutPress: .AboutPress;
+
+.u-pressText {
+    font-size: @scale * 16;
+    line-height: 20 / 16;
+    text-transform: uppercase;
+
+    @media @mobile {
+        font-size: @scale * 8;
+        line-height: 15 / 8;
+    }
+}
+
+@{AboutPress} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @media @mobile {
+        // justify-content: flex-start;
+        padding-bottom: @scale * 15;
+    }
+
+    &-title {
+        margin-bottom: @scale * 40;
+        color: @c-red;
+        font-size: @scale * 72;
+        line-height: 60 / 72;
+        letter-spacing: -@scale * 3;
+        text-transform: uppercase;
+        font-weight: @fw-light;
+        font-family: @font-secondary;
+
+        @media @mobile {
+            margin-bottom: @scale * 10;
+            font-size: @scale * 25;
+            line-height: 30 / 25;
+        }
+    }
+
+    &-text {
+        .u-pressText();
+
+        color: @c-white;
+    }
+
+    &-link {
+        .u-pressText();
+
+        display: inline-flex;
+        color: @c-red;
+        transition: color @ease;
+
+        .isDesktop &:hover {
+            color: @c-white;
+        }
+    }
+
+    &-image {
+        height: @scale * 180;
+        margin: @scale * 35 0 @scale * 25;
+
+        @media @mobile {
+            height: @scale * 120;
+            margin: @scale * 15 0 @scale * 10;
+        }
+
+        img {
+            .u-ObjectFit();
+        }
+    }
+
+    &-buttons {
+        margin-top: @scale * 30;
+
+        @media @mobile {
+            margin-top: @scale * 20;
+        }
+
+        &Item {
+            .u-Button--small();
+    
+            display: flex;
+    
+            &Wrapper:nth-child(even) {
+                margin-top: @scale * 40;
+    
+                @media @mobile {
+                    margin-top: @scale * 10;
+                }
+            }
+        }
+    }
+}

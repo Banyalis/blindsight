@@ -1,0 +1,12 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesSwitch() %}
+    <div class="MemoriesSwitch">
+        <a href="" class="MemoriesSwitch-item isActive">
+            {% call macros.svgSprite("i-spiral") %}{% endcall %}
+        </a>
+        <a href="" class="MemoriesSwitch-item">
+            {% call macros.svgSprite("i-grid") %}{% endcall %}
+        </a>
+    </div>
+{% endmacro %}

@@ -1,0 +1,20 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupAcknowledgements(block={}) %}
+    <div class="MemoriesPopup-acknowledgements isAnimated">
+        <div class="MemoriesPopup-acknowledgementsTitle">Acknowledgements</div>
+        <div class="MemoriesPopup-acknowledgementsList">
+            {% for item in block.acknowledgementsColumns %}
+                <div class="MemoriesPopup-acknowledgementsListColumn">
+                    {% for item in item.acknowledgements %}
+                        <div class="MemoriesPopup-acknowledgementsListItem">
+                            <a href="{{ item.link }}" target="_blank" class="MemoriesPopup-acknowledgementsListItemName">{{ item.name }}</a>
+                            <p class="MemoriesPopup-acknowledgementsListItemText">{{ item.text }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="MemoriesPopup-acknowledgementsOwner">Danil Krivoruchko / September, 2020</div>
+    </div>
+{% endmacro %}

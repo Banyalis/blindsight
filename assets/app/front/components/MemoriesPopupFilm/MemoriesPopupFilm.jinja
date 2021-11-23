@@ -1,0 +1,23 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupFilm(block={}) %}
+    <div class="MemoriesPopup-film isAnimated">
+        <div class="MemoriesPopup-filmVideo">
+            <video preload="none" autoplay loop muted canplaythrough playsinline>
+                <source src="{{ block.video }}" type="video/mp4">
+            </video>
+            <img src="{{ block.image }}" alt="">
+        </div>
+        <div class="MemoriesPopup-filmFooter">
+            <div class="MemoriesPopup-filmFooterInner">
+                <div class="MemoriesPopup-filmTitle">{{ block.title }}</div>
+                <div class="MemoriesPopup-filmCaption">{{ block.caption }}</div>
+            </div>
+            <div class="MemoriesPopup-filmButtonWrapper">
+                <a href="" class="MemoriesPopup-filmButton Button-cta">
+                    <span>Rewatch the Film</span>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

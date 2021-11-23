@@ -1,0 +1,98 @@
+@import "fonts";
+@import "common/MainPageWithCards";
+@import "common/Buttons";
+@import "common/PageForm";
+
+html, body, #root {
+  //background: aliceblue;
+    height: 100%;
+}
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 1024px;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    //background: #f8f8f8;
+    //color: #2e2f33;
+
+    font-family: @FFMarkWebPro, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern=1";
+    -moz-font-feature-settings: "kern";
+    -ms-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern";
+
+    letter-spacing: 0.025em;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+input, textarea {
+
+}
+
+table{
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: separate;
+
+    td {
+        vertical-align: top;
+        padding: 0;
+
+        &.td--leftColumn {
+            padding-right: 20px;
+        }
+        &.td--rightColumn {
+            padding-left: 20px;
+        }
+    }
+}
+
+.u-FlexColumns {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    flex-direction: row;
+    //background: gray;
+    justify-content: space-between;
+}
+.u-FlexColumnsBottom {
+    align-items: flex-end;
+}
+.u-FlexColumns2 .u-FlexColumn {
+    width: calc( (100% - 40px) / 2 );
+}
+.u-FlexColumns3 .u-FlexColumn {
+    width: calc( (100% - 80px) / 3 );
+}
+.u-FlexColumns3 .u-FlexColumn2 {
+    width: calc( (100% - 80px) / 3 * 2 + 40px );
+}
+.u-FlexColumns4 .u-FlexColumn {
+    width: calc( (100% - 120px) / 4 );
+}
+.u-InputMarginView + .u-InputMarginView {
+    margin-top: 20px;
+}

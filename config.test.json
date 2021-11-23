@@ -1,0 +1,13 @@
+{
+    "DB_NAME": "blindsight",
+    "DB_USER": "blindsight",
+    "DB_PASSWORD": "12345",
+    "DB_HOST": "127.0.0.1",
+    "DB_PORT": "3306",
+
+    "STATIC_URL": "/static/",
+    "MEDIA_URL": "/media/",
+
+    "HOT_RELOADING": false,
+    "STATIC_URL_HOT": "http://127.0.0.1:9999/static/"
+  }

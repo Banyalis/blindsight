@@ -1,0 +1,76 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesNav(data={}) %}
+    <div class="MemoriesNav isSpiral">
+        <div class="MemoriesNav-inner">
+            {% for item in data.nav | reverse | batch(4) | first | reverse %}
+                <div class="MemoriesNav-itemWrapper isCloned">
+                    <a href="{{ url('front:memories-popup', args=[item.slug]) }}" class="MemoriesNav-item u-Route">
+                        <div class="MemoriesNav-itemInner">
+                            <div class="MemoriesNav-itemVideo">
+                                <video preload="auto" loop muted canplaythrough playsinline src="" data-src="{{ item.video }}"></video>
+                                <div data-lazy-load data-src="{{ item.image }}" class="MemoriesNav-itemImage"></div>
+                            </div>
+                            <div class="MemoriesNav-itemContent">
+                                <div class="MemoriesNav-itemCaption">Memory:{{ item.slug }}</div>
+                                <div class="MemoriesNav-itemFooter">
+                                    <div class="MemoriesNav-itemHint">Explore →</div>
+                                    <div class="MemoriesNav-itemTitle">{{ item.title }}</div>
+                                </div>
+                            </div>
+                            <div class="MemoriesNav-itemOverlay"></div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            {% for item in data.nav %}
+                <div class="MemoriesNav-itemWrapper">
+                    <a href="{{ url('front:memories-popup', args=[item.slug]) }}" class="MemoriesNav-item u-Route">
+                        <div class="MemoriesNav-itemInner">
+                            <div class="MemoriesNav-itemVideo">
+                                <video preload="auto" loop muted canplaythrough playsinline src="" data-src="{{ item.video }}"></video>
+                                <div data-lazy-load data-src="{{ item.image }}" class="MemoriesNav-itemImage"></div>
+                            </div>
+                            <div class="MemoriesNav-itemContent">
+                                <div class="MemoriesNav-itemCaption">Memory:{{ item.slug }}</div>
+                                <div class="MemoriesNav-itemFooter">
+                                    <div class="MemoriesNav-itemHint">Explore →</div>
+                                    <div class="MemoriesNav-itemTitle">{{ item.title }}</div>
+                                </div>
+                            </div>
+                            <div class="MemoriesNav-itemOverlay"></div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            {% for item in data.nav | batch(5) | first %}
+                <div class="MemoriesNav-itemWrapper isCloned">
+                    <a href="{{ url('front:memories-popup', args=[item.slug]) }}" class="MemoriesNav-item u-Route">
+                        <div class="MemoriesNav-itemInner">
+                            <div class="MemoriesNav-itemVideo">
+                                <video preload="auto" loop muted canplaythrough playsinline src="" data-src="{{ item.video }}"></video>
+                                <div data-lazy-load data-src="{{ item.image }}" class="MemoriesNav-itemImage"></div>
+                            </div>
+                            <div class="MemoriesNav-itemContent">
+                                <div class="MemoriesNav-itemCaption">Memory:{{ item.slug }}</div>
+                                <div class="MemoriesNav-itemFooter">
+                                    <div class="MemoriesNav-itemHint">Explore →</div>
+                                    <div class="MemoriesNav-itemTitle">{{ item.title }}</div>
+                                </div>
+                            </div>
+                            <div class="MemoriesNav-itemOverlay"></div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="MemoriesNav-control">
+            <div class="MemoriesNav-controlPrev">
+                {% call macros.svgSprite("i-next") %}{% endcall %}
+            </div>
+            <div class="MemoriesNav-controlNext">
+                {% call macros.svgSprite("i-next") %}{% endcall %}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

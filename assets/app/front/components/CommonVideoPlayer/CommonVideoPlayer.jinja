@@ -1,0 +1,31 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro CommonVideoPlayer(data={}, mods=[]) %}
+    <div class="CommonVideoPlayer{% for mod in mods %} {{ mod }}{% endfor %}">
+        <div class="CommonVideoPlayer-inner Cursor-play">
+            <video{% if data.largeSize == 'true' %} poster="{{ data.videoPoster }}"{% endif %} canplaythrough playsinline class="CommonVideoPlayer-cover">
+                <source{% if data | length %} src="{{ data.video }}"{% endif %} type="video/mp4">
+            </video>
+            <div class="CommonVideoPlayer-playback isPlay">
+                {# <div class="CommonVideoPlayer-playIcon">
+                    {% call macros.svgSprite("i-play-small") %}{% endcall %}
+                </div>
+                <div class="CommonVideoPlayer-pauseIcon">
+                    {% call macros.svgSprite("i-pause") %}{% endcall %}
+                </div> #}
+            </div>
+            {% if data.largeSize != 'true' %}
+                <img src="{{ data.poster }}" class="CommonVideoPlayer-image" alt="">
+                <img src="{{ data.posterHover }}" class="CommonVideoPlayer-image" alt="">
+            {% endif %}
+        </div>
+        <div class="CommonVideoPlayer-controls">
+            <div class="CommonVideoPlayer-controlsCurrentTime">00:00</div>
+            <div class="CommonVideoPlayer-controlsTimeline">
+                <div class="CommonVideoPlayer-controlsTimelineProgress"></div>
+                <div class="CommonVideoPlayer-controlsTimelineLine"></div>
+            </div>
+            <div class="CommonVideoPlayer-controlsDuration">00:00</div>
+        </div>
+    </div>
+{% endmacro %}

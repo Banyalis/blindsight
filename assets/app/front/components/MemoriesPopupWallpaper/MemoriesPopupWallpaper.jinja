@@ -1,0 +1,20 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesPopupWallpaper(popup={}) %}
+    <div class="MemoriesPopup-wallpaper isAnimated">
+        <div class="MemoriesPopup-wallpaperImage">
+            <img src="{{ popup.wallpaperImage }}" alt="">
+        </div>
+        <div class="MemoriesPopup-wallpaperFooter">
+            <div class="MemoriesPopup-wallpaperInfo">
+                <div class="MemoriesPopup-wallpaperTitle">Hi-res</div>
+                <div class="MemoriesPopup-wallpaperFile">File→<br>{{ popup.wallpaperFile }}</div>
+            </div>
+            <div class="MemoriesPopup-wallpaperButtonWrapper">
+                <a href="{{ popup.wallpaperZip }}" download class="MemoriesPopup-wallpaperButton">
+                    <span>Download</span>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

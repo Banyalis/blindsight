@@ -1,0 +1,114 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@AboutVideo: .AboutVideo;
+
+@{AboutVideo} {
+    flex-shrink: 0;
+    width: @scale * 640;
+    margin: -@scale * 30 0;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+    @media @mobile {
+        width: @scale * 320;
+        margin: 0;
+    }
+
+    // &.isHidden {
+    //     video {
+    //         display: none;
+    //     }
+
+    //     img {
+    //         display: block;
+    //     }
+    // }
+
+    &-inner {
+        display: flex;
+        align-items: flex-end;
+        height: 100%;
+        padding: @scale * 30 @scale * 80;
+        position: relative;
+        z-index: 10;
+
+        @media @mobile {
+            padding: @scale * 15 @scale * 30;
+        }
+    }
+
+    &-playIcon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: @scale * 220;
+        height: @scale * 220;
+        margin: -@scale * 110 0 0 -@scale * 110;
+
+        @media @mobile {
+            width: @scale * 100;
+            height: @scale * 100;
+            margin: -@scale * 50 0 0 -@scale * 50;
+        }
+
+        svg path {
+            transform-origin: 50% 50%;
+            transform: translateX(0) scale(1);
+
+            @keyframes shift-triangle {
+                0% {
+                    opacity: 1;
+                    transform: translateX(0) scale(1);
+                }
+
+                45% {
+                    opacity: 0;
+                    transform: translateX(100%) scale(0);
+                }
+
+                55% {
+                    opacity: 0;
+                    transform: translateX(-100%) scale(0);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateX(0) scale(1);
+                }
+            }
+        }
+
+        .isDesktop &:hover svg path {
+            animation: shift-triangle .5s linear;
+        }
+    }
+
+    &-button {
+        .u-Button--small();
+
+        display: flex;
+
+        &Wrapper {
+            width: 100%;
+        }
+    }
+
+    video, img {
+        .u-AbsoluteObjectFit();
+    }
+
+    video {
+        .isTablet &, .isMobile & {
+            display: none;
+        }
+    }
+
+    img {
+        .isDesktop & {
+            display: none;
+        }
+    }
+}

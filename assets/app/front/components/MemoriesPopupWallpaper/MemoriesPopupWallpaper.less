@@ -1,0 +1,89 @@
+@import (reference) "~front/const";
+@import (reference) "~front/utils";
+
+@MemoriesPopupWallpaper: .MemoriesPopup-wallpaper;
+
+@{MemoriesPopupWallpaper} {
+    flex-shrink: 0;
+    width: @scale * 800;
+    border-radius: @scale * 20;
+    position: relative;
+    overflow: hidden;
+    background-color: @c-black;
+
+    @media @mobile {
+        width: @scale * 550;
+    }
+
+    &Image {
+        height: 100%;
+
+        img {
+            .u-ObjectFit();
+        }
+    }
+
+    &Footer {
+        position: absolute;
+        left: @scale * 40;
+        right: @scale * 40;
+        bottom: @scale * 40;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        @media @mobile {
+            left: @scale * 20;
+            right: @scale * 20;
+            bottom: @scale * 20;
+        }
+    }
+
+    &Info {
+        display: flex;
+        align-items: flex-end;
+        text-transform: uppercase;
+    }
+
+    &Title {
+        color: @c-white;
+        font-size: @scale * 60;
+        line-height: 55 / 60;
+        letter-spacing: -@scale * 4;
+
+        @media @mobile {
+            font-size: @scale * 36;
+            line-height: 30 / 36;
+            letter-spacing: -@scale * 2;
+        }
+
+        div {
+            display: inline-block;
+        }
+    }
+    
+    &File {
+        margin: 0 0 -@scale * 2 @scale * 16;
+        color: @c-white;
+        font-size: @scale * 16;
+        line-height: 20 / 16;
+        font-weight: @fw-bold;
+
+        @media @mobile {
+            margin: 0 0 -@scale * 2 @scale * 10;
+            font-size: @scale * 8;
+            line-height: 10 / 8;
+        }
+    }
+
+    &Button {
+        .u-Button--small();
+
+        display: flex;
+        width: @scale * 240;
+
+        @media @mobile {
+            width: @scale * 200;
+        }
+    }
+}

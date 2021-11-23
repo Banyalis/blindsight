@@ -1,0 +1,30 @@
+{% import "front/utils/macros.jinja" as macros %}
+
+{% macro MemoriesSlider(data={}) %}
+    <div class="MemoriesSlider">
+        <div class="MemoriesSlider-inner swiper-container">
+            <div class="swiper-wrapper">
+                {% for item in data.nav %}
+                    <div class="MemoriesSlider-itemWrapper swiper-slide">
+                        <a href="{% if item.about == 'true' %}{{ url('front:about') }}{% else %}{{ url('front:memories-popup', args=[item.slug]) }}{% endif %}" class="MemoriesSlider-item u-Route">
+                            <div class="MemoriesSlider-itemImage">
+                                <img data-lazy-load data-src="{{ item.imageMobile }}" alt="">
+                            </div>
+                            <div class="MemoriesSlider-itemContent">
+                                <div class="MemoriesSlider-itemCaption">Memory:{{ item.slug }}</div>
+                                <div class="MemoriesSlider-itemFooter">
+                                    <div class="MemoriesSlider-itemHint">Explore →</div>
+                                    <div class="MemoriesSlider-itemTitle">{{ item.title }}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="MemoriesSlider-hint">
+            {% call macros.svgSprite("i-next") %}{% endcall %}
+        </div>
+    </div>
+{% endmacro %}

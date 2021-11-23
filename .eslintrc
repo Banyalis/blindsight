@@ -1,0 +1,45 @@
+{
+    "globals": {
+        "$": false,
+        "jQuery": false,
+        "_": false,
+        "Backbone": false,
+        "app": false
+    },
+
+    "rules": {
+        // best practices
+        "semi": ["warn", "always"],
+        "no-unexpected-multiline": "warn",
+        "max-params": ["warn", 2],
+        "comma-dangle": ["warn", "never"],
+        "no-array-constructor": "warn",
+        "no-new-object": "warn",
+        "no-new-wrappers": "warn",
+        "dot-notation": "warn",
+
+
+        // variables
+        "one-var": ["warn", "never"],
+//        "vars-on-top": "warn",
+
+        // types
+        "radix": ["warn", "always"],
+
+        // style
+        "indent": ["warn", 8],
+        "no-tabs": "warn",
+        "no-mixed-spaces-and-tabs": "warn",
+        "camelcase": "warn",
+        "quotes": ["warn", "single", { "avoidEscape": true }],
+        "brace-style": ["warn", "1tbs", {"allowSingleLine": false}],
+        "curly": ["warn", "multi-line"],
+        "space-before-blocks": "warn",
+        "keyword-spacing": ["warn", { "before": true, "after": true }],
+        "space-before-function-paren": ["warn", {"anonymous": "always", "named": "never"}],
+        "space-infix-ops": "warn",
+        "space-unary-ops": ["warn", {"words": true, "nonwords": false}],
+        "newline-before-return": "warn",
+        "newline-per-chained-call": ["warn", {"ignoreChainWithDepth": 2}]
+    }
+}
